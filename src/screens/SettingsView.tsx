@@ -1,4 +1,5 @@
 import { MOVE_CHECKED_KEY } from "./notes/model";
+import { onWindows } from "../lib/platform";
 import { ConfirmSheet } from "../components/Confirm";
 import { toast, toastSaved, useErrorToast } from "../components/Toast";
 import { Progress } from "../components/Spinner";
@@ -653,7 +654,7 @@ export function SettingsView({ onSignOut }: { onSignOut: (keep: boolean) => Prom
               <FolderRow
                 app="drivews"
                 label="Drive folder"
-                off="Your iCloud Drive in Files and every other app"
+                off={onWindows ? "Your iCloud Drive in File Explorer and every other app" : "Your iCloud Drive in Files and every other app"}
                 folder={folder}
                 busy={folderBusy}
                 line={folderState}

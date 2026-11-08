@@ -95,6 +95,15 @@
 !macroend
 
 ; After Tauri has taken "Skykeep" away, and like it, kept on an update.
+; iCloud Drive in File Explorer gone with Skykeep: no longer a cloud folder in Explorer's
+; navigation pane (Nextcloud's stayed registered after uninstall, #3562). Before the program
+; is removed, since it is what unregisters it; never on an update, which keeps the folder.
+!macro NSIS_HOOK_PREUNINSTALL
+  ${If} $UpdateMode <> 1
+    ExecWait '"$INSTDIR\${MAINBINARYNAME}.exe" --forget-cloud-folders'
+  ${EndIf}
+!macroend
+
 !macro NSIS_HOOK_POSTUNINSTALL
   ${If} $UpdateMode <> 1
     !insertmacro SKYKEEP_MENU

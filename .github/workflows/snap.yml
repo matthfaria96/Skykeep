@@ -8,7 +8,7 @@ on:
     inputs:
       tag:
         description: Release whose .deb the Snap wraps
-        default: v0.1.13
+        default: v0.1.14
       publish:
         description: Upload to the Snap Store (stable)
         type: boolean
@@ -41,7 +41,7 @@ jobs:
       - name: The release's .deb
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ inputs.tag || 'v0.1.13' }}
+          TAG: ${{ inputs.tag || 'v0.1.14' }}
         run: |
           gh release download "$TAG" -p 'Skykeep_*_amd64.deb' -D snap/local
           mv snap/local/Skykeep_*_amd64.deb snap/local/skykeep.deb

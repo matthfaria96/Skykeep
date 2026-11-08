@@ -2072,6 +2072,7 @@ async fn send_event(
 
 /// Whether a change in connectivity is the network coming back: online now, and not known to
 /// be online before. `was` is updated to now.
+#[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 fn came_online(was: &mut Option<bool>, online: bool) -> bool {
     let back = online && *was != Some(true);
     *was = Some(online);
@@ -2080,11 +2081,13 @@ fn came_online(was: &mut Option<bool>, online: bool) -> bool {
 
 /// NetworkManager's `NMState`: 60 is reaching the local site, 70 the internet. Apple may be
 /// reachable at either (a captive portal clears to 70), so both count.
+#[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 fn nm_online(state: u32) -> bool {
     state >= 60
 }
 
 /// connman's `State`: "ready" is connected, "online" connected and checked.
+#[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 fn connman_online(state: &str) -> bool {
     matches!(state, "ready" | "online")
 }

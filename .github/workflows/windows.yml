@@ -98,6 +98,12 @@ jobs:
           "VCPKGRS_TRIPLET=x64-windows-static" >> $env:GITHUB_ENV
       # The window's files must exist for the app crate to compile.
       - run: npm run build
+      # iCloud Drive in File Explorer on this Windows: a cloud folder registered, listed and
+      # read by another process, its output shown (whether the shell took the registration).
+      - name: iCloud Drive in File Explorer
+        env:
+          RUSTFLAGS: --remap-path-prefix=${{ github.workspace }}=skykeep -C target-feature=+crt-static
+        run: cargo test --release -p quince-vfs --test cloud_windows --locked -- --nocapture --test-threads=1
       - name: Tests, on Windows
         if: ${{ inputs.test_first }}
         # In release mode, so the installer build below reuses what this compiled. The probe

@@ -16,8 +16,9 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
   xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+  xmlns:desktop3="http://schemas.microsoft.com/appx/manifest/desktop/windows10/3"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap uap10 desktop rescap">
+  IgnorableNamespaces="uap uap10 desktop desktop3 rescap">
 
   <Identity
     Name="__IDENTITY_NAME__"
@@ -52,6 +53,12 @@
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\Square71x71Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" />
       </uap:VisualElements>
       <Extensions>
+        <!-- iCloud Drive in File Explorer (crates/quince-vfs/src/cloud.rs): a cloud folder of the
+             package's own, which Windows removes with it — undeclared, it stayed registered
+             after uninstall (Microsoft Q&A 5551232). -->
+        <desktop3:Extension Category="windows.cloudFiles">
+          <desktop3:CloudFiles />
+        </desktop3:Extension>
         <!-- Open at Login: off until turned on in Settings (src-tauri/src/login.rs), then
              listed in Task Manager's Startup apps. Started hidden, as the Run key starts it. -->
         <desktop:Extension Category="windows.startupTask" Executable="skykeep.exe" EntryPoint="Windows.FullTrustApplication" uap10:Parameters="--background">

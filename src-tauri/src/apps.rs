@@ -161,6 +161,7 @@ pub fn new_event(app: &AppHandle) {
 
 /// The app ID a window of `key` is known by: the app's own launcher entry's name, as the
 /// desktop matches them (`<identifier>.Notes.desktop`).
+#[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 pub fn app_id(app: &AppHandle, key: &str) -> String {
     let name = APPS
         .iter()

@@ -60,6 +60,7 @@ pub fn shown() {
 }
 
 /// Whether any window has been shown this run.
+#[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 pub fn was_shown() -> bool {
     SHOWN.load(Ordering::SeqCst)
 }
@@ -83,10 +84,12 @@ fn hides(search_only: bool, needs_you: bool, tray: impl FnOnce() -> bool) -> boo
 
 /// How long a Skykeep started for a search goes on with no window shown and no search asked
 /// before it ends: the person quit it, and a search does not change that.
+#[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 pub const SEARCH_IDLE: std::time::Duration = std::time::Duration::from_secs(10 * 60);
 
 /// Whether a run started for a search is done: no window shown, nothing asked for a while.
 #[must_use]
+#[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 pub fn search_done(shown: bool, idle: std::time::Duration) -> bool {
     !shown && idle >= SEARCH_IDLE
 }
@@ -159,6 +162,7 @@ fn uses_startup_task(package_identity: bool) -> bool {
 }
 
 /// Running inside a Flatpak.
+#[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 fn in_flatpak() -> bool {
     std::env::var_os("FLATPAK_ID").is_some()
 }

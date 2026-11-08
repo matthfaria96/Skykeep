@@ -6,8 +6,13 @@
 //! own front end ([`fuse`] on Linux) asks it and never waits on the network for what the
 //! library already knows. Design: docs/mount-design.md.
 
+#[cfg(windows)]
+pub mod cloud;
+#[cfg(windows)]
+mod cloud_local;
 #[cfg(target_os = "linux")]
 pub mod fuse;
+pub mod transfer;
 pub mod writes;
 
 use quince_core::drive::DriveItem;
@@ -262,39 +267,113 @@ impl Inodes {
     }
 }
 
+/// Which file system a name is made for: the folder on Linux (FUSE), or Windows Explorer's
+/// (Cloud Files on NTFS), whose names forbid more and ignore case.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Names {
+    Linux,
+    Windows,
+}
+
+impl Names {
+    /// This computer's.
+    pub const HERE: Names = if cfg!(windows) {
+        Names::Windows
+    } else {
+        Names::Linux
+    };
+}
+
 /// A folder's items as names a file manager shows: the name with its extension, NFC as Apple
 /// keeps them. Two that would share a name (Apple's names differ by case or by a character a
 /// path cannot hold) are told apart, never one hiding the other.
 #[must_use]
 pub fn named(items: &[DriveItem]) -> Vec<(String, DriveItem)> {
-    let base_of = |item: &DriveItem| {
-        // "/" cannot be in a name on Linux, and NUL nowhere: Apple allows the first.
-        let base: String = item
-            .display_name()
-            .chars()
-            .map(|c| match c {
-                '/' => '∕',
-                '\0' => '�',
-                c => c,
-            })
-            .collect();
-        if base == "." || base == ".." || base.is_empty() {
-            format!("{base}_")
-        } else {
-            base
+    named_on(items, Names::HERE)
+}
+
+/// One of Apple's names as `on` can hold it. Linux forbids only "/" and NUL. Windows also
+/// forbids `< > : " \ | ? *` and control characters, reserves device names (CON, NUL, COM1…,
+/// with any extension) and drops a trailing dot or space: each is shown as its look-alike, as
+/// rclone's encoding does, so the file is there under a name that reads the same. A name
+/// Windows can't hold, left as it is, failed the whole folder in Nextcloud (#9524) — every
+/// file in it unreachable until a restart.
+#[must_use]
+pub fn shown_name(name: &str, on: Names) -> String {
+    let mut base: String = name
+        .chars()
+        .map(|c| match (on, c) {
+            (Names::Linux, '/') => '∕',
+            (Names::Linux, '\0') => '�',
+            (Names::Windows, '\0') => '\u{2400}',
+            (Names::Linux, c) => c,
+            (Names::Windows, '<') => '＜',
+            (Names::Windows, '>') => '＞',
+            (Names::Windows, ':') => '：',
+            (Names::Windows, '"') => '＂',
+            (Names::Windows, '/') => '／',
+            (Names::Windows, '\\') => '＼',
+            (Names::Windows, '|') => '｜',
+            (Names::Windows, '?') => '？',
+            (Names::Windows, '*') => '＊',
+            // Control characters as their pictures (␁…␟).
+            (Names::Windows, c) if (c as u32) < 0x20 => {
+                char::from_u32(0x2400 + c as u32).unwrap_or('�')
+            }
+            (Names::Windows, c) => c,
+        })
+        .collect();
+    if base == "." || base == ".." || base.is_empty() {
+        return format!("{base}_");
+    }
+    if on == Names::Windows {
+        // A trailing dot or space is dropped by Windows itself: the name would change under us.
+        if base.ends_with('.') {
+            base.pop();
+            base.push('．');
+        } else if base.ends_with(' ') {
+            base.pop();
+            base.push('␠');
         }
+        // CON, PRN, AUX, NUL, COM0–9, LPT0–9 — alone or before an extension — open a device.
+        let stem = base
+            .split('.')
+            .next()
+            .unwrap_or("")
+            .trim_end()
+            .to_ascii_uppercase();
+        let device = matches!(stem.as_str(), "CON" | "PRN" | "AUX" | "NUL")
+            || ((stem.starts_with("COM") || stem.starts_with("LPT"))
+                && stem.len() == 4
+                && stem.as_bytes()[3].is_ascii_digit());
+        if device {
+            let cut = base.find('.').unwrap_or(base.len());
+            base.insert(cut, '_');
+        }
+    }
+    base
+}
+
+/// [`named`] for the names `on` holds. On Windows two names that differ only in case are one
+/// name (NTFS ignores case), so they are told apart like any two the same (Nextcloud #9736).
+#[must_use]
+pub fn named_on(items: &[DriveItem], on: Names) -> Vec<(String, DriveItem)> {
+    let base_of = |item: &DriveItem| shown_name(&item.display_name(), on);
+    let key = |name: &str| match on {
+        Names::Linux => name.to_string(),
+        Names::Windows => name.to_uppercase(),
     };
     // Every name the folder holds as it is, so a number given to tell two apart never lands on
     // a third that is really called that ("Report (2).pdf" beside two "Report.pdf"s).
-    let real: std::collections::HashSet<String> = items.iter().map(base_of).collect();
+    let real: std::collections::HashSet<String> = items.iter().map(|i| key(&base_of(i))).collect();
     let mut given: std::collections::HashSet<String> = std::collections::HashSet::new();
     let mut taken: HashMap<String, usize> = HashMap::new();
     let mut out = Vec::with_capacity(items.len());
     for item in items {
         let base = base_of(item);
-        let n = taken.entry(base.clone()).or_insert(0);
+        let n = taken.entry(key(&base)).or_insert(0);
         *n += 1;
-        let name = if *n == 1 && given.insert(base.clone()) {
+        let name = if *n == 1 && given.insert(key(&base)) {
             base
         } else {
             // "Report (2).pdf": the second of two with the same name.
@@ -306,7 +385,7 @@ pub fn named(items: &[DriveItem]) -> Vec<(String, DriveItem)> {
                     }
                     _ => format!("{base} ({n})"),
                 };
-                if !real.contains(&candidate) && given.insert(candidate.clone()) {
+                if !real.contains(&key(&candidate)) && given.insert(key(&candidate)) {
                     break candidate;
                 }
                 *n += 1;
@@ -942,7 +1021,10 @@ mod tests {
             item("c", "a/b", None, "FOLDER", 0, "e"),
             item("d", "..", None, "FOLDER", 0, "e"),
         ];
-        let names: Vec<String> = named(&items).into_iter().map(|(n, _)| n).collect();
+        let names: Vec<String> = named_on(&items, Names::Linux)
+            .into_iter()
+            .map(|(n, _)| n)
+            .collect();
         assert_eq!(names, ["Report.pdf", "Report (2).pdf", "a∕b", ".._"]);
     }
 
@@ -956,6 +1038,35 @@ mod tests {
         ];
         let names: Vec<String> = named(&items).into_iter().map(|(n, _)| n).collect();
         assert_eq!(names, ["Report.pdf", "Report (3).pdf", "Report (2).pdf"]);
+    }
+
+    /// Windows: forbidden characters, device names, a trailing dot or space, and names that
+    /// differ only in case all shown, each under its own name (Nextcloud #9524, #9736).
+    #[test]
+    fn windows_names_are_all_shown() {
+        let items = [
+            item("a", "a:b?", Some("txt"), "FILE", 1, "e"),
+            item("b", "CON", Some("txt"), "FILE", 1, "e"),
+            item("c", "notes.", None, "FOLDER", 0, "e"),
+            item("d", "Report", Some("pdf"), "FILE", 1, "e"),
+            item("e", "report", Some("PDF"), "FILE", 1, "e"),
+        ];
+        let names: Vec<String> = named_on(&items, Names::Windows)
+            .into_iter()
+            .map(|(n, _)| n)
+            .collect();
+        assert_eq!(
+            names,
+            [
+                "a：b？.txt",
+                "CON_.txt",
+                "notes．",
+                "Report.pdf",
+                "report (2).PDF"
+            ]
+        );
+        // Linux keeps its own rules.
+        assert_eq!(shown_name("a:b?", Names::Linux), "a:b?");
     }
 
     #[test]

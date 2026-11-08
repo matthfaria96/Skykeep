@@ -1,26 +1,33 @@
-<div align="center">
+<p align="center">
+  <img src="packaging/icons/skykeep-1024.png" alt="Skykeep logo" width="96" height="96">
+</p>
 
-<img src="packaging/icons/skykeep-1024.png" alt="Skykeep" width="104">
+<h1 align="center">Skykeep</h1>
 
-# Skykeep
+<p align="center"><strong>Six apps. Your whole iCloud.</strong><br>Notes, Reminders, Calendar, Contacts, iCloud Drive and Photos as native apps for Windows and Linux. Fast, light, and offline.</p>
 
-### Your iPhone's iCloud, on Windows and Linux.
+<p align="center">
+  <a href="https://github.com/YashwanthKamireddi/Skykeep/releases/latest"><strong>Download</strong></a> ·
+  <a href="#install">Install</a> ·
+  <a href="#engineering">How it works</a> ·
+  <a href="#private-by-design">Privacy</a> ·
+  <a href=".github/CONTRIBUTING.md">Contribute</a>
+</p>
 
-Notes, Reminders, Calendar, Contacts, iCloud Drive and Photos as real desktop apps.<br>Kept on your computer, so they open instantly and work offline. In sync with your iPhone, iPad and Mac.
+<p align="center">
+  <a href="ARCHITECTURE.md"><img src="https://img.shields.io/badge/Built_with-Rust-2f6fd6" alt="Built with Rust"></a>
+  <a href="#install"><img src="https://img.shields.io/badge/Linux_%C2%B7_Windows-native-2f6fd6" alt="Linux and Windows, native"></a>
+  <a href="https://github.com/YashwanthKamireddi/Skykeep/releases"><img src="https://img.shields.io/github/downloads/YashwanthKamireddi/Skykeep/total?label=GitHub%20Downloads&color=2f6fd6" alt="GitHub downloads"></a>
+  <a href="https://github.com/YashwanthKamireddi/Skykeep/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/YashwanthKamireddi/Skykeep/ci.yml?branch=main&label=CI" alt="CI"></a>
+  <a href="https://github.com/YashwanthKamireddi/Skykeep/releases/latest"><img src="https://img.shields.io/github/v/release/YashwanthKamireddi/Skykeep?label=release&color=2f6fd6" alt="Latest release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-GPL--3.0-2f6fd6" alt="GPL-3.0 license"></a>
+</p>
 
-<p><a href="https://apps.microsoft.com/detail/9P6B042JNK54"><img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" height="52"></a>&nbsp;&nbsp;<a href="https://snapcraft.io/skykeep"><img src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" alt="Get it from the Snap Store" height="52"></a></p>
+<p align="center"><a href="https://apps.microsoft.com/detail/9P6B042JNK54"><img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" height="48"></a>&nbsp;&nbsp;<a href="https://snapcraft.io/skykeep"><img src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" alt="Get it from the Snap Store" height="48"></a></p>
 
-<sub><a href="https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-windows-x64-setup.exe">Windows installer</a> · <a href="https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-amd64.deb">.deb</a> · <a href="https://copr.fedorainfracloud.org/coprs/yashonfed/skykeep/">Fedora</a> · <a href="https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-x86_64.AppImage">AppImage</a> · <a href="#install">All options</a></sub>
+Skykeep keeps your iCloud on your own computer and syncs it quietly in the background. Every app opens instantly, works with no connection at all, and stays in step with your iPhone, iPad and Mac as you use them. Underneath is a small Rust engine that idles at under 0.1% of a CPU core.
 
-<br>
-
-<img src="docs/media/hero.webp" alt="Skykeep ticking off a reminder, switching to the week in Calendar, opening a note, then a contact card, an iCloud Drive folder and the photo library" width="880">
-
-<p><a href="https://github.com/YashwanthKamireddi/Skykeep/releases/latest"><img src="https://img.shields.io/github/v/release/YashwanthKamireddi/Skykeep?label=release&color=2f6fd6" alt="Latest release"></a> <a href="https://github.com/YashwanthKamireddi/Skykeep/releases"><img src="https://img.shields.io/github/downloads/YashwanthKamireddi/Skykeep/total?label=downloads&color=2f6fd6" alt="Downloads"></a> <a href="https://github.com/YashwanthKamireddi/Skykeep/actions/workflows/ci.yml"><img src="https://github.com/YashwanthKamireddi/Skykeep/actions/workflows/ci.yml/badge.svg" alt="CI"></a> <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-4a5568" alt="License: GPL-3.0"></a></p>
-
-<sub>Free and open source · No Skykeep account · No analytics</sub>
-
-</div>
+<p align="center"><img src="docs/media/hero.webp" alt="Skykeep ticking off a reminder, switching to the week in Calendar, opening a note, then a contact card, an iCloud Drive folder and the photo library" width="880"></p>
 
 ## This fork: Skykeep for Mac, and a new look
 
@@ -29,263 +36,108 @@ This is a fork of [Skykeep](https://github.com/YashwanthKamireddi/Skykeep) by Ya
 - **Skykeep for Mac** ([`macos/`](macos/README.md)) — a native SwiftUI app that puts Mail, Contacts, Reminders, Calendar, Notes, Photos, iCloud Drive and Passwords in one window, with a home screen that previews all of them. Notes and Mail are read and written online in iCloud through the same Rust code this repository uses on Windows and Linux (checklists tick, notes are edited in place, mail is sent and filed), so no other app is ever opened. It also connects Chromium browsers such as Vivaldi to Apple's Passwords app.
 - **A new icon** — a cloud kept by a keyhole, under a rising sun — for macOS, Windows and Linux alike.
 
-The Windows and Linux apps are otherwise unchanged.
+The Windows and Linux apps are otherwise the same as upstream, kept up to date with it.
 
-## Built to be trusted
-
-Skykeep asks for your Apple Account, so it's built to deserve it.
-
-- **Every line is public.** The whole app is open source under the GPL, so anyone can read exactly what it does with your account.
-- **Your password is never sent.** Sign-in uses Apple's SRP protocol with Apple's own two-factor, the same way icloud.com signs in.
-- **It talks to Apple.** Every connection is locked to its hosts in code. The only others are calendars you subscribe to yourself, and GitHub to check for Skykeep updates, which you can turn off.
-- **No Skykeep servers, accounts, analytics or crash reports.** Your iCloud data goes between your computer and Apple only.
-- **Your library stays on your disk,** readable only by you. Export everything to Markdown, iCalendar and vCard any time.
-- **The Hidden album is locked** behind your Apple Account password.
-- **Every release is built in public** by this repository's workflow, with SHA-256 checksums and signature-checked updates, and published through the Microsoft Store, the Snap Store and Chocolatey, each with its own checks before anyone can install it.
-
-[SECURITY.md](SECURITY.md) shows the code behind each point.
-
-## Six apps, one sign-in
+## Your iCloud, as apps
 
 <table>
   <tr>
-    <td width="50%" align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="docs/media/notes-dark.webp">
-        <img src="docs/media/notes-light.webp" alt="Skykeep Notes showing folders, pinned notes and a trip note with a tag, a link, a picture, a checklist and a table">
-      </picture>
-      <b>Notes</b>
-    </td>
-    <td width="50%" align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="docs/media/reminders-dark.webp">
-        <img src="docs/media/reminders-light.webp" alt="Skykeep Reminders showing a list with sections, subtasks, flags, tags, a link and a place, beside coloured lists and smart lists">
-      </picture>
-      <b>Reminders</b>
-    </td>
+    <td width="33%" align="center" valign="top"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/notes-dark.webp"><img src="docs/media/notes-light.webp" alt="Notes with folders, pinned notes and a trip note"></picture><br><b>Notes</b><br><sub>Checklists, tables, drawings, #tags. Edits from two devices merge.</sub></td>
+    <td width="33%" align="center" valign="top"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/reminders-dark.webp"><img src="docs/media/reminders-light.webp" alt="Reminders with lists, sections and subtasks"></picture><br><b>Reminders</b><br><sub>Smart lists, subtasks, tags. Alerts with Complete and Snooze.</sub></td>
+    <td width="33%" align="center" valign="top"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/calendar-dark.webp"><img src="docs/media/calendar-light.webp" alt="Calendar in week view"></picture><br><b>Calendar</b><br><sub>Day to year views, drag to edit, time zones, video-call Join.</sub></td>
   </tr>
   <tr>
-    <td width="50%" align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="docs/media/calendar-dark.webp">
-        <img src="docs/media/calendar-light.webp" alt="Skykeep Calendar in week view with events from four calendars, an all-day trip, a birthday and reminders">
-      </picture>
-      <b>Calendar</b>
-    </td>
-    <td width="50%" align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="docs/media/contacts-dark.webp">
-        <img src="docs/media/contacts-light.webp" alt="Skykeep Contacts showing contacts with photos and a full card with phones, emails, related names, an address and a birthday">
-      </picture>
-      <b>Contacts</b>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="docs/media/drive-dark.webp">
-        <img src="docs/media/drive-light.webp" alt="Skykeep Drive showing a folder of pictures and documents with thumbnails in grid view">
-      </picture>
-      <b>iCloud Drive</b>
-    </td>
-    <td width="50%" align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="docs/media/photos-dark.webp">
-        <img src="docs/media/photos-light.webp" alt="Skykeep Photos showing the library by month with favourites, videos and albums">
-      </picture>
-      <b>Photos</b>
-    </td>
+    <td width="33%" align="center" valign="top"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/contacts-dark.webp"><img src="docs/media/contacts-light.webp" alt="A full contact card"></picture><br><b>Contacts</b><br><sub>Every field, photos, lists, duplicate merging, vCard and CSV import.</sub></td>
+    <td width="33%" align="center" valign="top"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/drive-dark.webp"><img src="docs/media/drive-light.webp" alt="An iCloud Drive folder in grid view"></picture><br><b>iCloud Drive</b><br><sub>Previews, uploads, resumable downloads, and a real folder in File Explorer or Files.</sub></td>
+    <td width="33%" align="center" valign="top"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/photos-dark.webp"><img src="docs/media/photos-light.webp" alt="The photo library by month"></picture><br><b>Photos</b><br><sub>Library by month, albums, Shared Library, Live Photos and videos.</sub></td>
   </tr>
 </table>
 
-- **Instant.** Your library lives on your computer, so every app opens right away and your edits show the moment you make them.
-- **Live.** A note or reminder from your iPhone, iPad or Mac usually arrives in about a second, over Apple's push channel.
-- **Offline.** Keep writing with no Wi-Fi. Your changes sync when you're back online.
-- **At home on your desktop.** Each app has its own launcher or Start-menu entry, with alerts, a tray icon and quick capture. On Linux, iCloud Drive and Photos are real folders in your file manager.
+## Engineering
 
-| | Linux | Windows |
-|---|:-:|:-:|
-| Notes, Reminders, Calendar, Contacts, iCloud Drive and Photos | ✅ | ✅ |
-| Opens instantly and works offline, in sync with your iPhone | ✅ | ✅ |
-| Reminder alerts with Complete and Snooze | ✅ | ✅ |
-| Its own launcher or Start-menu entry for each app | ✅ | ✅ |
-| Your family's Shared Library, shared albums, and a password-locked Hidden album | ✅ | ✅ |
-| Export everything to Markdown, iCalendar and vCard | ✅ | ✅ |
-| Keeps itself up to date | ✅ Snap, COPR, AUR, AppImage | ✅ |
-| Apple Silicon Macs running Linux (64-bit ARM) | ✅ | |
-| iCloud Drive and Photos as folders in your file manager | ✅ | Coming |
-| Results in system search | ✅ GNOME, KDE | |
+Skykeep is a native engine written in Rust with a light Tauri window on top: one codebase for Linux and Windows, on x86 and ARM.
 
-<details>
-<summary><b>Everything each app does</b></summary>
+- Every screen reads a local SQLite library, never the network. Apps open instantly and keep working offline.
+- Changes from your iPhone arrive over Apple's own push channel, as they happen.
+- Edits go into an outbox: shown the moment you make them, sent in order, held while you're offline, and safe to send twice.
+- Notes merge through Apple's own CRDT, so typing on two devices at once keeps both edits.
+- Apple's sign-in, SRP with two-factor, is rebuilt in Rust. Your password is never sent.
+- The network lock lives in the engine's DNS resolver: it cannot look up a host that isn't Apple's.
+- The photo grid stays smooth through 50,000 photos, keeping only what's near the screen in memory.
+- iCloud Drive and Photos are real folders in File Explorer, through Cloud Files, the system OneDrive is built on, with Free up space and Always keep on this device. On Linux they're folders in your file manager, through FUSE.
+- Each release passes over 1,300 Rust tests and is installed and launched on Ubuntu, Debian, Mint, Fedora, openSUSE, Arch and Windows before it's published.
 
-- **Notes:** headings, styles, lists and checklists; pictures, files and tables; #tags, scans, PDFs and drawings in place; folders, pinned notes, search and Recently Deleted. Edits made here and on your phone at the same moment are merged, not overwritten.
-- **Reminders:** lists with colours, icons and sections; Today, Scheduled, Flagged and smart lists; subtasks, due dates, repeats, flags, priorities, tags and early alerts. Type "Call Alex tomorrow at 5" and it's set. Desktop alerts with Complete and Snooze.
-- **Calendar:** Day, Week, Month and Year; drag to create, move and resize; repeating events, alerts, time zones, birthdays and holidays; a Join button for video calls; your reminders on the schedule; `webcal://` subscriptions and `.ics` files.
-- **Contacts:** nearly every field with Apple's labels, contact photos, lists, My Card, finding and merging duplicates; vCard and Google or Outlook CSV import, vCard export.
-- **iCloud Drive:** list or grid with thumbnails; upload files and folders, rename, move, duplicate, Space to preview; download whole folders, which carry on where they stopped if interrupted.
-- **Photos:** your library by month, albums, shared albums, Favourites and Videos; your family's Shared Library beside your own, with Both, Personal and Shared to choose between, as on iPhone; Live Photos and videos play; slideshow, upload, copy and original-quality download.
-- **Everywhere:** search across every app, light and dark, results in GNOME and KDE search, and a jump list and taskbar button for each app on Windows.
-</details>
+[ARCHITECTURE.md](ARCHITECTURE.md) has the full tour.
+
+## Private by design
+
+- No Skykeep servers, accounts, analytics or crash reports. Your iCloud goes between your computer and Apple only.
+- Your password and session live in the system keyring, the saved connection is encrypted with AES-256-GCM, and your library sits in a folder only you can read.
+- The app window can't reach the internet at all; its content policy allows only Skykeep's own engine.
+- Every line is open source, and every release is built in public with checksums and signature-checked updates.
+
+[SECURITY.md](SECURITY.md) shows the code behind each point.
 
 ## Install
 
-| Your system | Get Skykeep |
+| Platform | Installation |
 |---|---|
-| **Windows 10 and 11** | [Microsoft Store](https://apps.microsoft.com/detail/9P6B042JNK54) · [installer](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-windows-x64-setup.exe) · [Chocolatey](https://community.chocolatey.org/packages/skykeep): `choco install skykeep` · [Scoop](https://github.com/YashwanthKamireddi/scoop-bucket) |
-| **Ubuntu, Debian, Mint** | [Snap Store](https://snapcraft.io/skykeep) · [`.deb`](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-amd64.deb) · [`.deb` for ARM](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-arm64.deb) |
-| **Fedora**, including Fedora Asahi Remix | [COPR](https://copr.fedorainfracloud.org/coprs/yashonfed/skykeep/): `sudo dnf copr enable yashonfed/skykeep && sudo dnf install skykeep` |
-| **openSUSE** | [`.rpm`](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-x86_64.rpm) · [`.rpm` for ARM](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-aarch64.rpm) |
-| **Arch, CachyOS, Manjaro** | AUR: [`skykeep`](https://aur.archlinux.org/packages/skykeep) or [`skykeep-bin`](https://aur.archlinux.org/packages/skykeep-bin) · [more](#arch-linux) |
-| **Any other Linux** | [AppImage](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-x86_64.AppImage) |
+| **Windows** | [Microsoft Store](https://apps.microsoft.com/detail/9P6B042JNK54), or the [installer](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-windows-x64-setup.exe). Also `choco install skykeep` and [Scoop](https://github.com/YashwanthKamireddi/scoop-bucket) |
+| **Linux stores** | [Snap Store](https://snapcraft.io/skykeep)<br>Fedora and Fedora Asahi: `sudo dnf copr enable yashonfed/skykeep && sudo dnf install skykeep`<br>Arch: `yay -S skykeep` |
+| **Linux files** | [`.deb`](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-amd64.deb) ([ARM](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-arm64.deb)), [`.rpm`](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-x86_64.rpm) ([ARM](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-aarch64.rpm)), or the [AppImage](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-linux-x86_64.AppImage) for any other Linux |
 
-Then open **Skykeep**, sign in with your Apple Account, and approve the sign-in on your iPhone. Each app fills in as your library arrives. Every file, with checksums, is on the [latest release](https://github.com/YashwanthKamireddi/Skykeep/releases/latest).
+Every file, with checksums, is on the [latest release](https://github.com/YashwanthKamireddi/Skykeep/releases/latest). The Windows installer, the AppImage and every store keep Skykeep up to date; for a `.deb` or `.rpm`, install the new one over the old.
 
 <details>
-<summary><b>Commands for each Linux file</b></summary>
+<summary>Commands for each Linux file, and fixes for Fedora, openSUSE and the AppImage</summary>
 
 ```sh
-sudo apt install ./Skykeep-linux-amd64.deb                          # Ubuntu 24.04+, Debian 13, Mint 22
-sudo apt install ./Skykeep-linux-arm64.deb                          # the same, on 64-bit ARM
-sudo dnf install ./Skykeep-linux-x86_64.rpm                         # Fedora 41+ (Skykeep-linux-aarch64.rpm on ARM)
+sudo apt install ./Skykeep-linux-amd64.deb                          # Ubuntu, Debian, Mint
+sudo dnf install ./Skykeep-linux-x86_64.rpm                         # Fedora
 sudo zypper install --allow-unsigned-rpm ./Skykeep-linux-x86_64.rpm # openSUSE Tumbleweed
 chmod +x Skykeep-linux-x86_64.AppImage && ./Skykeep-linux-x86_64.AppImage
 sudo snap install skykeep && sudo snap connect skykeep:password-manager-service
 ```
 
-Run them in your Downloads folder (right-click an empty spot, **Open in Terminal**). The Snap's second command lets it keep you signed in through your keyring.
+The Snap's second command lets it keep you signed in through your keyring. On Ubuntu the AppImage needs `libfuse2t64` once (`libfuse2` on 22.04). Fedora and openSUSE leave out the decoder for iPhone photos (HEIC) for patent reasons: on Fedora, enable RPM Fusion and `sudo dnf install libheif-freeworld`; on openSUSE, add Packman and install `libheif1`. For Drive and Photos as folders on Arch, also `sudo pacman -S fuse3`.
 </details>
 
-<details>
-<summary><b>About the "Windows protected your PC" message</b></summary>
+## Sign in
 
-The [Microsoft Store](https://apps.microsoft.com/detail/9P6B042JNK54) copy is checked by Microsoft and installs straight away. The installer on this page is new to SmartScreen, so Windows asks you to confirm once: **More info**, then **Run anyway**.
-</details>
+1. Open Skykeep and sign in with your Apple Account.
+2. Approve the sign-in on your iPhone, iPad or Mac, as you would for icloud.com.
+3. Your library arrives, and each app fills in as it lands. From then on everything opens from your computer.
 
-<details>
-<summary><b>iPhone photos (HEIC) on Fedora or openSUSE</b></summary>
+Using Advanced Data Protection? Turn on **Access iCloud Data on the Web** first (iPhone: Settings, your name, iCloud). Calendar and Contacts then open right away, and Notes, Reminders, Photos and iCloud Drive sync once you approve Skykeep on your iPhone.
 
-Fedora and openSUSE leave out the decoder for Apple's photo format, for patent reasons. Everything else works without it. To see iPhone photos and videos:
-
-```sh
-# Fedora, with RPM Fusion
-sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf swap ffmpeg-free ffmpeg --allowerasing && sudo dnf install libheif-freeworld
-
-# openSUSE Tumbleweed, with Packman
-sudo zypper ar -cfp 90 https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman
-sudo zypper refresh && sudo zypper install --allow-vendor-change --from packman libavcodec62 libheif1 libde265-0 libheif-HEIF
-```
-</details>
+## Questions
 
 <details>
-<summary><b>Opening the AppImage on Ubuntu</b></summary>
-
-Start it with `./Skykeep-linux-x86_64.AppImage --appimage-extract-and-run`, or install the library it needs once: `sudo apt install libfuse2t64` (`libfuse2` on Ubuntu 22.04).
-</details>
-
-<a id="arch-linux"></a>
-<details>
-<summary><b>Arch, CachyOS, EndeavourOS, Manjaro</b></summary>
-
-From the AUR, built from source or as the released binary:
-
-```sh
-yay -S skykeep        # or: yay -S skykeep-bin
-```
-
-Or from this repository's own PKGBUILD:
-
-```sh
-git clone https://github.com/YashwanthKamireddi/Skykeep.git
-cd Skykeep/packaging/arch && makepkg -si
-```
-
-For iCloud Drive and Photos as folders, also `sudo pacman -S fuse3`.
-</details>
-
-<details>
-<summary><b>Updates and system requirements</b></summary>
-
-The Windows installer and the AppImage update themselves: a notice offers **Update and Restart**, and a new version installs only after its signature check, never while a change is still on its way to iCloud. The Microsoft Store, Chocolatey, Scoop, Snap, COPR and the AUR keep their copies current. For the `.deb` or `.rpm`, install a new version over the old one; your library and sign-in stay.
-
-Skykeep needs Windows 10 or 11, or a Linux desktop with WebKitGTK 4.1 and a keyring (GNOME Keyring or KWallet), on Wayland or X11, with glibc 2.39 or newer: Ubuntu 24.04, Mint 22, Debian 13, Fedora 41, openSUSE Tumbleweed or later, on 64-bit x86 or ARM (Apple Silicon Macs with Asahi Linux included). The AppImage is x86 only and runs on Ubuntu 22.04 too.
-</details>
-
-## FAQ
-
-<details>
-<summary><b>Is Skykeep made by Apple?</b></summary>
+<summary>Is Skykeep made by Apple?</summary>
 
 No. It's an independent, open-source app that works with iCloud. Apple, iCloud and iPhone are trademarks of Apple Inc.
 </details>
 
 <details>
-<summary><b>Why does it need my Apple Account password?</b></summary>
+<summary>How is this different from iCloud for Windows?</summary>
+
+iCloud for Windows brings Photos and iCloud Drive to File Explorer, and Calendar and Contacts through Outlook. Skykeep has Notes and Reminders too, all six as apps of their own, works offline, and runs on Linux as well.
+</details>
+
+<details>
+<summary>Why does it need my Apple Account password?</summary>
 
 Notes, Reminders, Drive and Photos open only to a full sign-in with two-factor, the same one icloud.com uses. Skykeep proves your password to Apple with SRP rather than sending it, and keeps it in your system keyring so it can sign back in by itself. Like any keyring entry, programs running as you can read it, and signing out erases it.
 </details>
 
 <details>
-<summary><b>I use Advanced Data Protection. Will it work?</b></summary>
+<summary>How do I send a diagnostics log?</summary>
 
-Yes, with **Access iCloud Data on the Web** turned on (iPhone: Settings → your name → iCloud). Calendar and Contacts open right away. For Notes, Reminders, Photos and iCloud Drive, approve Skykeep on your iPhone, iPad or Mac when it asks, as you would for icloud.com.
+Quit Skykeep and start it with `SKYKEEP_LOG=1 skykeep` (Windows PowerShell: `$env:SKYKEEP_LOG=1`, then `skykeep.exe`). It writes `diagnostics.log` in its data folder with the addresses it asked and Apple's answer codes, never passwords, tokens or anything from your library. Attach it to a [bug report](https://github.com/YashwanthKamireddi/Skykeep/issues/new?template=bug_report.yml).
 </details>
-
-<details>
-<summary><b>How is this different from iCloud for Windows?</b></summary>
-
-Skykeep gives you Notes, Reminders, Calendar, Contacts, iCloud Drive and Photos as six apps of their own, each with its own Start-menu entry, taskbar button and offline library. And it runs on Linux too.
-</details>
-
-<details>
-<summary><b>Is my library encrypted on disk?</b></summary>
-
-Your library is in your own data folder, readable only by you. Turn on your system's disk encryption (BitLocker on Windows, LUKS on Linux) to protect it if your computer is lost, as you would for any app.
-</details>
-
-<details>
-<summary><b>How do I send a diagnostics log?</b></summary>
-
-Quit Skykeep, then start it with `SKYKEEP_LOG=1 skykeep` (Windows PowerShell: `$env:SKYKEEP_LOG=1`, then `skykeep.exe`). It writes `diagnostics.log` in its data folder with the addresses it asked and Apple's answer codes, never passwords, tokens, your name or anything from your library. Attach it to an [issue](https://github.com/YashwanthKamireddi/Skykeep/issues).
-</details>
-
-<details>
-<summary><b>How does it work?</b></summary>
-
-A Rust engine with a Tauri 2 window. Every screen reads a local SQLite library, never the network, which is why it's instant and works offline. Edits go into an outbox that shows them at once, sends them in order, waits when you're offline, and is safe to send twice.
-
-- **Sign-in** is Apple's SRP and two-factor, as on icloud.com.
-- **Notes and Reminders** are CloudKit records. A note's text sits in `ENCRYPTED_BYTES` fields that turn out to be gzip around a protobuf, and edits merge through Apple's own CRDT, so a note typed on both sides at once comes out whole.
-- **Calendar, Contacts and Drive** use Apple's web services, **Photos** CloudKit, and changes arrive over Apple's push channel.
-- **On Linux**, a FUSE mount puts iCloud Drive and Photos in your file manager.
-
-Over 1,000 Rust tests hold it together. The full tour is in [ARCHITECTURE.md](ARCHITECTURE.md).
-</details>
-
-## Roadmap
-
-- iCloud Drive and Photos as folders on Windows
-- Replying to calendar invitations
-- Shared notes and shared reminder lists
-- Downloading a whole photo album or library to a folder
-- Skykeep on Flathub and winget
-
-Something you miss? [Open an issue](https://github.com/YashwanthKamireddi/Skykeep/issues). I read every one.
 
 ## Contributing
 
-Skykeep is made by [Yashwanth](https://github.com/YashwanthKamireddi), who uses an iPhone with a Linux desktop every day. Skykeep for Mac and the new icon are by [Matheus Faria](https://github.com/matthfaria96), in this fork. Bug reports, packaging for your distro, design ideas and code are all welcome. [CONTRIBUTING.md](.github/CONTRIBUTING.md) has the setup and a map of the code; run `./check.sh` before a pull request.
+Skykeep is made by [Yashwanth](https://github.com/YashwanthKamireddi). Skykeep for Mac and the new icon are by [Matheus Faria](https://github.com/matthfaria96), in this fork. Bug reports, packaging for your distro, design ideas and code are all welcome. [CONTRIBUTING.md](.github/CONTRIBUTING.md) has the setup and a map of the code, and [Discussions](https://github.com/YashwanthKamireddi/Skykeep/discussions) is the place for questions and ideas. Security problems go to a [private report](https://github.com/YashwanthKamireddi/Skykeep/security/advisories/new).
 
-```sh
-git clone https://github.com/YashwanthKamireddi/Skykeep.git
-cd Skykeep && npm ci && ./run.sh
-```
-
-Found a security problem? Please report it privately, as [SECURITY.md](SECURITY.md) explains.
-
-If Skykeep saves you a trip to the browser, a ⭐ helps other iPhone, iPad and Mac owners find it.
-
-## License
-
-Copyright (C) 2026 Yashwanth Kamireddi; Skykeep for Mac, the new icon and other changes in this fork copyright (C) 2026 Matheus Faria. Released under [GPL-3.0](LICENSE): if you share a copy or a changed version, keep this notice and the same licence. Skykeep is an independent project, not affiliated with or endorsed by Apple Inc. iCloud is a trademark of Apple Inc.
+Copyright (C) 2026 Yashwanth Kamireddi; Skykeep for Mac, the new icon and other changes in this fork copyright (C) 2026 Matheus Faria. [GPL-3.0](LICENSE): if you share a copy or a changed version, keep this notice and the same licence. Not affiliated with or endorsed by Apple Inc.

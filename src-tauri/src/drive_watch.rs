@@ -225,6 +225,9 @@ async fn read_zones(
     if !listed.is_empty() {
         quiet!("drive watch: {} folder(s) changed", listed.len());
         app.emit(CHANGED, &listed).ok();
+        // File Explorer's folders too (Windows), off the async threads: it touches the disk.
+        let changed = listed.clone();
+        tauri::async_runtime::spawn_blocking(move || crate::mount::drive_changed(&changed));
     }
     failed.map_or(Ok(()), Err)
 }

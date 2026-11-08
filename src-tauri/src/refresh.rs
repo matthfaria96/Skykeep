@@ -715,11 +715,16 @@ async fn run(client: &Arc<Mutex<Client>>, data: &LibraryLock, services: &[&str])
         .await
         .ok()
         .flatten();
-    let changed = reports
+    let changed: Vec<_> = reports
         .iter()
         .filter(|r| r.changed)
         .map(|r| r.service)
         .collect();
+    // New or changed photos reach the Photos folder in File Explorer too (Windows), whether or
+    // not a window is open; off the async threads, as it touches the disk.
+    if changed.contains(&"photos") {
+        tauri::async_runtime::spawn_blocking(crate::mount::photos_changed);
+    }
     let items = reports
         .iter()
         .filter(|r| r.changed)

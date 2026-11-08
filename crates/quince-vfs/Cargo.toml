@@ -1,6 +1,6 @@
 [package]
 name = "quince-vfs"
-version = "0.1.13"
+version = "0.1.14"
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
@@ -16,6 +16,24 @@ serde_json = { workspace = true }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 fuser = { version = "0.18", default-features = false }
+
+# iCloud Drive in File Explorer (cloud.rs): the Cloud Files API and the shell's registration.
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.62", features = [
+    "Foundation",
+    "Storage",
+    "Storage_Provider",
+    "Storage_Search",
+    "Win32_Foundation",
+    "Win32_Storage_CloudFilters",
+    "Win32_Storage_FileSystem",
+    "Win32_System_CorrelationVector",
+    "Win32_System_IO",
+    "Win32_Security",
+    "Win32_Security_Authorization",
+    "Win32_System_Threading",
+] }
+windows-future = "0.3"
 
 [dev-dependencies]
 image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }

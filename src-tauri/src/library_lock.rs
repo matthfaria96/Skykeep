@@ -138,6 +138,7 @@ impl LibraryLock {
         Held { guard, _turn: turn }
     }
 
+    #[cfg_attr(not(target_os = "linux"), allow(dead_code))]
     pub fn try_lock(&self) -> Result<Held<'_>, tokio::sync::TryLockError> {
         let turn = Turn::take(&self.others);
         let guard = self.library.try_lock()?;

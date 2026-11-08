@@ -2043,7 +2043,9 @@ async fn auth_sign_out(keep: bool, app: tauri::AppHandle, auth: State<'_, Auth>)
     LIVE.store(false, Ordering::SeqCst);
     // A notes password typed this session goes with the session.
     notes_cmds::forget_passwords();
-    tauri::async_runtime::spawn_blocking(mount::release)
+    // Gone with the account: on Windows no longer in File Explorer either (mount::forget).
+    let leaving = app.clone();
+    tauri::async_runtime::spawn_blocking(move || mount::forget(&leaving))
         .await
         .map_err(|e| e.to_string())?;
     let mut client = auth.client.lock().await;
@@ -6793,6 +6795,13 @@ fn build_tray(app: &tauri::App) -> tauri::Result<()> {
 fn main() {
     // First, before any thread: how freed memory goes back to the system (#11).
     return_freed_memory();
+    // The uninstaller's last word (packaging/windows/installer-hooks.nsh): iCloud Drive no
+    // longer a cloud folder in File Explorer. Nothing else is started.
+    #[cfg(windows)]
+    if std::env::args().any(|a| a == "--forget-cloud-folders") {
+        mount::forget_on_uninstall();
+        return;
+    }
     // Started by an update: the version it replaced finishes exiting first, so this launch is
     // not handed to it as a second one (single instance, below).
     updates::after_update();

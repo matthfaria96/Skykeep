@@ -1,0 +1,14 @@
+# The workflows' actions, kept current once a month in one pull request. Rust and npm
+# dependencies are updated by hand with the release that needs them; GitHub's security
+# updates still open a pull request at once for any with a known vulnerability.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "CI"

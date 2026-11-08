@@ -103,7 +103,7 @@
     <color type="primary" scheme_preference="dark">#0B2A4A</color>
   </branding>
   <releases>
-    <release version="0.1.13" date="2026-11-07">
+    <release version="0.1.14" date="2026-11-07">
       <description>
         <p>Skykeep stays signed in and never sends a code to your iPhone on its own, works with Advanced Data Protection, downloads whole iCloud Drive folders, keeps both edits when an event changes on two devices, and stays fast with very large photo libraries.</p>
       </description>

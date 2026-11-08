@@ -11,10 +11,15 @@ name: CI
 
 on:
   workflow_dispatch:
+  # A change to the words or pictures alone (README, docs) builds nothing: it skipped no check
+  # that could fail, and every README edit cancelled the run before it. Secrets in any commit are
+  # still refused by the pre-commit guard, and the release runs every check whatever changed.
   push:
     branches: [main]
+    paths-ignore: ["**.md", "docs/media/**"]
   pull_request:
     branches: [main]
+    paths-ignore: ["**.md", "docs/media/**"]
 
 permissions:
   contents: read

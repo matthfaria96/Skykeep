@@ -553,15 +553,173 @@ fn stop(which: Which) {
     }
 }
 
-#[cfg(not(target_os = "linux"))]
+/// The folders in File Explorer (Cloud Files): each connected while Skykeep runs. Registered
+/// once and kept registered across restarts, so Explorer keeps them and every file already
+/// downloaded stays a plain file; unregistered only when turned off or at sign-out (`forget`).
+#[cfg(windows)]
+static CLOUD: Mutex<Vec<(Which, PathBuf, quince_vfs::cloud::CloudFolder)>> = Mutex::new(Vec::new());
+
+/// Explorer's id for a folder, per Windows user (its SID) and kind.
+#[cfg(windows)]
+fn cloud_id(which: Which) -> Result<String, String> {
+    quince_vfs::cloud::sync_root_id(match which {
+        Which::Drive => "iCloudDrive",
+        Which::Photos => "iCloudPhotos",
+    })
+}
+
+#[cfg(windows)]
+fn start(app: &AppHandle, which: Which, at: &std::path::Path) -> Result<(), String> {
+    if mounted(which).is_some() {
+        return Ok(());
+    }
+    let id = cloud_id(which)?;
+    let icon = std::env::current_exe()
+        .map(|exe| format!("{},0", exe.display()))
+        .unwrap_or_default();
+    let rt = tauri::async_runtime::handle().inner().clone();
+    let (provider, name) = match which {
+        Which::Drive => (
+            quince_vfs::cloud::Provider::new(
+                Arc::new(AppRemote {
+                    app: app.clone(),
+                    links: Arc::new(Mutex::new(HashMap::new())),
+                }),
+                Arc::new(AppStore::new(app.clone())),
+                rt,
+                // Saved files are copied here before they are sent, beside the library.
+                crate::state_dir(app).join("drive-sending"),
+            ),
+            "iCloud Drive",
+        ),
+        // The same tree as the Photos folder on Linux (mount_photos): read through the app's
+        // own photo cache, and only ever added to or deleted from.
+        Which::Photos => (
+            quince_vfs::cloud::Provider::new(
+                Arc::new(crate::mount_photos::PhotosRemote(app.clone())),
+                Arc::new(crate::mount_photos::PhotosStore(app.clone())),
+                rt,
+                crate::state_dir(app).join("photos-sending"),
+            )
+            .add_only(),
+            "iCloud Photos",
+        ),
+    };
+    let folder = quince_vfs::cloud::start(
+        at,
+        &quince_vfs::cloud::Shown {
+            id: &id,
+            name,
+            icon: &icon,
+        },
+        provider,
+    )
+    .map_err(|e| format!("{name} could not be added to File Explorer: {e}"))?;
+    CLOUD
+        .lock()
+        .unwrap_or_else(std::sync::PoisonError::into_inner)
+        .push((which, at.to_path_buf(), folder));
+    Ok(())
+}
+
+/// Disconnected (quit, a library handed over): Explorer keeps the folder, and its files.
+#[cfg(windows)]
+fn stop(which: Which) {
+    CLOUD
+        .lock()
+        .unwrap_or_else(std::sync::PoisonError::into_inner)
+        .retain(|(w, ..)| *w != which);
+}
+
+/// Skykeep being uninstalled: its cloud folders unregistered, from where they are by default
+/// (the shell's registration is by id; the bare one, where the shell refused, by path).
+#[cfg(windows)]
+pub fn forget_on_uninstall() {
+    let home = std::env::var_os("USERPROFILE")
+        .map(PathBuf::from)
+        .unwrap_or_default();
+    for which in [Which::Drive, Which::Photos] {
+        if let Ok(id) = cloud_id(which) {
+            quince_vfs::cloud::unregister(&home.join(which.folder()), &id);
+        }
+    }
+}
+
+/// Turned off, or signed out: no longer a cloud folder in Explorer at all.
+#[cfg(windows)]
+fn forget_folder(app: &AppHandle, which: Which) {
+    stop(which);
+    if let Ok(id) = cloud_id(which) {
+        quince_vfs::cloud::unregister(&place(app, which), &id);
+    }
+}
+
+#[cfg(windows)]
+fn mounted(which: Which) -> Option<PathBuf> {
+    CLOUD
+        .lock()
+        .unwrap_or_else(std::sync::PoisonError::into_inner)
+        .iter()
+        .find(|(w, ..)| *w == which)
+        .map(|(_, at, _)| at.clone())
+}
+
+#[cfg(not(any(target_os = "linux", windows)))]
 fn start(_app: &AppHandle, _which: Which, _at: &std::path::Path) -> Result<(), String> {
     Err("These folders are not on this system yet.".into())
 }
-#[cfg(not(target_os = "linux"))]
+#[cfg(not(any(target_os = "linux", windows)))]
 fn stop(_which: Which) {}
-#[cfg(not(target_os = "linux"))]
+#[cfg(not(any(target_os = "linux", windows)))]
 fn mounted(_which: Which) -> Option<PathBuf> {
     None
+}
+#[cfg(not(windows))]
+fn forget_folder(_app: &AppHandle, which: Which) {
+    stop(which);
+}
+
+/// Drive folders Apple changed (the change feed's): brought up to date in File Explorer. On
+/// Linux the mount reads the library afresh by itself.
+pub fn drive_changed(folders: &[String]) {
+    #[cfg(windows)]
+    {
+        let cloud = CLOUD
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        for (which, _, folder) in cloud.iter() {
+            if *which == Which::Drive {
+                for id in folders {
+                    folder.refresh(id);
+                }
+            }
+        }
+    }
+    #[cfg(not(windows))]
+    let _ = folders;
+}
+
+/// Photos changed at Apple: every Photos folder File Explorer has listed brought up to date
+/// (Windows). Its folders are views of the library (years, months, albums), so all of them are
+/// looked at again, not one named folder.
+pub fn photos_changed() {
+    #[cfg(windows)]
+    {
+        let cloud = CLOUD
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        for (which, _, folder) in cloud.iter() {
+            if *which == Which::Photos {
+                folder.refresh_all();
+            }
+        }
+    }
+}
+
+/// At sign-out: each folder gone with the account — on Windows no longer in Explorer either.
+pub fn forget(app: &AppHandle) {
+    forget_folder(app, Which::Drive);
+    forget_folder(app, Which::Photos);
 }
 
 fn status(app: &AppHandle, which: Which, problem: Option<String>) -> FolderStatus {
@@ -581,7 +739,8 @@ fn status(app: &AppHandle, which: Which, problem: Option<String>) -> FolderStatu
         path: at.to_string_lossy().into_owned(),
         problem,
         waiting,
-        available: cfg!(target_os = "linux") && !in_flatpak(),
+        // Linux (not in the Flatpak, which has no FUSE), and Windows.
+        available: (cfg!(target_os = "linux") && !in_flatpak()) || cfg!(windows),
     }
 }
 
@@ -718,7 +877,7 @@ async fn set(app: AppHandle, which: Which, on: bool) -> Result<FolderStatus, Str
         let problem = if on {
             start(&app, which, &place(&app, which)).err()
         } else {
-            stop(which);
+            forget_folder(&app, which);
             None
         };
         let data = app.state::<Data>();
