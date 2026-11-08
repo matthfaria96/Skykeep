@@ -1,72 +1,183 @@
-# Skykeep para Mac
+<p align="center">
+  <a href="https://github.com/matthfaria96/Skykeep/releases/latest">
+    <img alt="Skykeep" src="Resources/AppIcon-1024.png" width="180">
+  </a>
+</p>
 
-[English](README.md) · **Português**
+<h1 align="center">Skykeep para Mac</h1>
 
-Todo o seu iCloud num app nativo para macOS: **E-mail, Contatos, Lembretes, Calendário, Notas, Fotos, iCloud Drive e Senhas** numa janela só, com uma tela de *Início* que mostra uma prévia de cada um. Feito em Swift e SwiftUI, com Liquid Glass. Notas e E-mail são lidos e gravados online no iCloud, então um item de checklist marcado aqui fica marcado no iPhone, e nenhum outro app é aberto.
+<p align="center"><a href="README.md">English</a> · <b>Português</b></p>
 
-Um fork do [Skykeep](https://github.com/YashwanthKamireddi/Skykeep) de Yashwanth Kamireddi (Windows e Linux), feito para o Mac por [Matheus Faria](https://github.com/matthfaria96). Software livre (GPL-3.0).
+<p align="center">
+  <b>Todo o seu iCloud, numa janela só.</b><br>
+  E-mail, Contatos, Lembretes, Calendário, Notas, Fotos, iCloud Drive e Senhas<br>
+  num único app nativo, com uma tela de início que mostra o seu dia de relance.
+</p>
 
-![Skykeep para Mac: o Calendário na visão de mês](docs/calendar.jpg)
+<p align="center">
+  <img alt="Swift nativo" src="https://img.shields.io/badge/Swift-nativo-F05138?style=flat-square&logo=swift&logoColor=white">
+  <img alt="macOS 26+" src="https://img.shields.io/badge/macOS%2026%2B-Apple%20Silicon%20%C2%B7%20Intel-26282e?style=flat-square&logo=apple">
+  <img alt="Grátis" src="https://img.shields.io/badge/pre%C3%A7o-gr%C3%A1tis-2ea44f?style=flat-square">
+  <img alt="Sem anúncios, sem rastreio" src="https://img.shields.io/badge/sem-an%C3%BAncios%20%C2%B7%20rastreio-3a3a3a?style=flat-square">
+</p>
 
-## Recursos
+<p align="center">
+  <a href="https://github.com/matthfaria96/Skykeep/releases/latest"><b>Baixar</b></a> ·
+  <a href="#o-que-ele-faz">O que ele faz</a> ·
+  <a href="#instalando-no-macos">Como instalar</a> ·
+  <a href="#primeiros-passos">Primeiros passos</a> ·
+  <a href="#perguntas-frequentes">Perguntas frequentes</a> ·
+  <a href="#compilando">Compilando</a>
+</p>
 
-| Área | O que faz |
+> [!NOTE]
+> **Sem conta do Skykeep, sem servidores, sem anúncios, sem rastreio.** Seus dados vão só entre o
+> seu Mac e a Apple. Grátis e de código aberto (GPL-3.0), parte do [witchmymac](https://witchmymac.com/).
+
+<p align="center">
+  <img src="docs/calendar.jpg" alt="Skykeep para Mac: o Calendário na visão de mês" width="860">
+</p>
+
+## O que ele faz
+
+**Seu iCloud, sem abas.** O iCloud de nove apps num lugar só, abrindo na hora. Notas e E-mail são
+lidos e gravados online no iCloud, então um item de checklist marcado aqui fica marcado no iPhone,
+e nenhum outro app é aberto.
+
+🏠 Início · ✉️ E-mail · 👤 Contatos · ✅ Lembretes · 📅 Calendário · 📝 Notas · 🖼️ Fotos ·
+☁️ iCloud Drive · 🔑 Senhas · 🔎 Busca em tudo · 📍 Barra de menus
+
+- **Seu dia de relance.** A tela de início mostra o próximo compromisso (com botão de entrar em reuniões), os lembretes de hoje, e-mails não lidos, as últimas notas, aniversários, fotos deste dia em outros anos e arquivos recentes.
+- **Notas do jeito que nasceram.** Títulos, listas, cores, links, imagens e checklists clicáveis, editadas no lugar e salvas no iCloud sozinhas, em todos os aparelhos.
+- **E-mail de verdade.** Ler, escrever, responder, encaminhar, sinalizar, arquivar e apagar, no servidor do iCloud, com imagens remotas e rastreadores bloqueados.
+- **Os dados do próprio Mac.** Lembretes, Calendário, Contatos, Fotos e iCloud Drive direto do macOS, já sincronizados, com Visualização Rápida e mapas dentro do app.
+- **Senhas em todo lugar.** Touch ID, gerador de senhas fortes, e Vivaldi, Chrome, Brave, Edge, Arc e Opera conectados ao app Senhas da Apple, nos dois sentidos.
+
+<p align="center"><a href="https://github.com/matthfaria96/Skykeep/releases/latest"><b>Baixar o Skykeep</b></a> · <a href="https://github.com/matthfaria96/Skykeep/tree/main/macos">Código-fonte</a> · macOS 26 Tahoe ou mais novo</p>
+
+## Instalando no macOS
+
+**O jeito mais rápido: uma linha no Terminal.**
+
+```sh
+curl -fsSL https://witchmymac.com/install.sh | bash -s skykeep
+```
+
+Ele baixa a última versão do GitHub, confere o SHA-256, instala o Skykeep em Aplicativos e abre,
+sem aviso do macOS (arquivos baixados pelo `curl` não ganham a marca de quarentena). Rode de novo
+para atualizar. O script é aberto: [install.sh](https://witchmymac.com/install.sh).
+
+**Ou à mão: três passos, trinta segundos.**
+
+1. **Baixe o `.dmg`** na [última versão](https://github.com/matthfaria96/Skykeep/releases/latest).
+2. **Arraste para Aplicativos.** Abra o `.dmg` e arraste o Skykeep para a pasta **Aplicativos**.
+3. **Abra.** Na primeira vez, o macOS pede confirmação. Veja abaixo como liberar.
+
+### Primeira abertura: o macOS vai bloquear o app. É normal.
+
+O Skykeep é grátis e não passa pela App Store, então o macOS pede para você confirmar a origem uma
+vez. Depois disso ele abre normalmente, para sempre.
+
+| Passo | O que fazer |
+|:---:|---|
+| **1** | Abra o Skykeep. Aparece o aviso **"“Skykeep” Não Foi Aberto"**. Clique em **OK**. Nunca em *Mover para o Lixo*. |
+| **2** | No menu Apple (canto superior esquerdo), abra **Ajustes do Sistema…** |
+| **3** | Vá em **Privacidade e Segurança** e role até **Segurança**. Vai aparecer *"“Skykeep” foi bloqueado para proteger seu Mac"*. Clique em **Abrir Mesmo Assim**. |
+| **4** | Confirme clicando em **Abrir Mesmo Assim** de novo e digite sua senha ou use o Touch ID. |
+| **5** | Pronto! Daqui pra frente é só abrir por Aplicativos ou pelo Spotlight. |
+
+> [!TIP]
+> O site do witchmymac tem um [guia visual animado](https://witchmymac.com/#liberar) com cada uma dessas telas.
+
+<details>
+<summary><b>Prefere o Terminal?</b></summary>
+
+Depois de arrastar o Skykeep para Aplicativos, tire a marca de quarentena:
+
+```sh
+xattr -dr com.apple.quarantine /Applications/Skykeep.app
+```
+
+</details>
+
+> [!NOTE]
+> **Por que isso acontece?** A Apple cobra US$ 99 por ano para "notarizar" apps. Como o Skykeep é
+> grátis, o macOS pede para você confirmar a origem uma vez.
+
+### Requisitos
+
+| App | macOS mínimo | Processador |
+|---|---|---|
+| Skykeep para Mac | 26 Tahoe | Apple Silicon e Intel |
+
+## Primeiros passos
+
+| App | Na primeira vez |
 |---|---|
-| **Início** | Um bloco por app: o próximo compromisso (com *Agora* e botão de entrar em reuniões) e os próximos 7 dias, lembretes de hoje, e-mails não lidos, últimas notas, aniversários, fotos deste dia em outros anos, arquivos recentes e um campo de lembrete rápido |
-| **E-mail** | iCloud Mail online: ler (imagens remotas e rastreadores bloqueados), escrever, responder, responder a todos, encaminhar, marcar como lida/não lida, sinalizar, arquivar e apagar, no servidor como no iPhone |
-| **Notas** | Notas do iCloud online: a formatação do Notas (títulos, listas, checklists, cores, links, imagens), checklists clicáveis, texto editado no lugar e salvo sozinho, estilos de parágrafo, notas novas, mover e apagar |
-| **Lembretes** | Listas inteligentes, suas listas, marcar, editar, mover, prioridades; datas em português ("amanhã 9h") |
-| **Calendário** | Dia, semana, mês e agenda, minicalendário, calendários ligados e desligados, eventos novos e editados, locais num mapa dentro do app |
-| **Contatos** | Busca, fichas, editar e criar; ligar, mensagem, FaceTime e e-mail num clique |
-| **Fotos** | Biblioteca, favoritos, vídeos, álbuns, Ocultos com Touch ID, original salvo em Downloads |
-| **iCloud Drive** | Suas pastas e as dos apps (Pages, Numbers…), status de download, Visualização Rápida dentro do app, arrastar arquivos para enviar |
-| **Senhas** | Touch ID, Chaveiro do Mac, gerador de senhas fortes e **navegadores conectados ao app Senhas da Apple** (Vivaldi, Chrome, Brave, Edge, Arc, Opera) |
-| **Em todo lugar** | Busca em tudo (⌘K), ⌘1–⌘9 para trocar de app, ⌘N para criar, item na barra de menus com o dia e um lembrete rápido, abrir ao iniciar a sessão |
+| **Calendário, Lembretes, Contatos, Fotos** | Clique em **Permitir acesso**. O macOS pergunta uma vez só. |
+| **Notas** | Entre no iCloud com sua conta Apple e o código de 6 dígitos que aparece nos seus aparelhos. Pedido uma vez; a sessão fica no Chaveiro do Mac. |
+| **E-mail** | Em [account.apple.com](https://account.apple.com) › Entrar e Segurança › **Senhas de App**, crie uma chamada "Skykeep" e cole junto com seu endereço do iCloud. |
+| **Senhas em outros navegadores** | Senhas › **Navegadores** › **Conectar ao App Senhas** e reinicie o navegador. Instale a extensão "Senhas do iCloud" da Apple se ainda não tiver. |
+| **Imagens dentro das notas** | Opcional: ligue o **Acesso Total ao Disco** para o Skykeep em Ajustes do Sistema › Privacidade e Segurança. |
 
-## Instalação
+## Perguntas frequentes
 
-Requer macOS 26 ou mais novo (Apple Silicon ou Intel).
+<details>
+<summary><b>A senha da minha conta Apple fica segura?</b></summary>
 
-Escolha um:
+Ela não vai para lugar nenhum além da Apple. O login usa o protocolo SRP da própria Apple, com dois
+fatores, do mesmo jeito que o icloud.com, então a senha em si nunca é enviada. A sessão fica no
+Chaveiro do Mac. Não existem servidores nem contas do Skykeep.
+</details>
 
-1. **Terminal, uma linha (recomendado).** Cole no Terminal:
-   ```sh
-   curl -fsSL https://witchmymac.com/install.sh | bash -s skykeep
-   ```
-   Ele baixa a última versão do GitHub, confere o SHA-256, instala o Skykeep em Aplicativos e abre. Não aparece aviso do macOS, porque arquivos baixados pelo `curl` não ganham a marca de "baixado da internet". Rode a mesma linha de novo para atualizar. O script é aberto: [install.sh](https://witchmymac.com/install.sh).
-2. **Baixe o DMG** em [Releases](https://github.com/matthfaria96/Skykeep/releases/latest), arraste o Skykeep para Aplicativos e libere uma vez com:
-   ```sh
-   xattr -dr com.apple.quarantine "/Applications/Skykeep.app"
-   ```
-   Isso só tira a marca de "baixado da internet" desse app.
-3. **Baixe o DMG** e libere pelos Ajustes do Sistema: abra o app, clique em OK no aviso, depois vá em Ajustes do Sistema › Privacidade e Segurança e clique em Abrir Mesmo Assim.
+<details>
+<summary><b>Por que o E-mail pede uma senha de app?</b></summary>
 
-## Uso
+É o jeito que a Apple oferece para apps de e-mail que não sejam o Mail acessarem o iCloud Mail
+(IMAP e SMTP). Ela só serve para o e-mail, e você pode revogá-la quando quiser em account.apple.com.
+</details>
 
-- **Calendário, Lembretes, Contatos, Fotos:** clique em *Permitir acesso* na primeira vez; o macOS pergunta uma vez só.
-- **Notas:** entre no iCloud uma vez com a conta Apple e o código de 6 dígitos que aparece nos seus aparelhos. A senha é verificada pelo SRP da Apple, como no icloud.com, e nunca é enviada; a sessão fica no Chaveiro do Mac.
-- **E-mail:** em [account.apple.com](https://account.apple.com) › Entrar e Segurança › Senhas de App, crie uma chamada "Skykeep" e cole junto com seu endereço do iCloud. Ela fica no Chaveiro e pode ser revogada quando quiser.
-- **Senhas em outros navegadores:** Senhas › *Navegadores* › *Conectar ao App Senhas*, reinicie o navegador e instale a extensão "Senhas do iCloud" da Apple se ainda não tiver. As senhas já salvas no navegador podem ser importadas para o app Senhas na mesma tela.
-- **Imagens dentro das notas:** ligue o *Acesso Total ao Disco* para o Skykeep (Ajustes do Sistema › Privacidade e Segurança) para mostrá-las a partir da cópia que o Notas guarda no Mac; sem isso, aparecem como um marcador.
+<details>
+<summary><b>Ele abre o Notas, o Mail ou outros apps sozinho?</b></summary>
 
-## Como funciona
+Não. Notas e E-mail são lidos e gravados online no iCloud; mapas e pré-visualizações de arquivos
+abrem dentro do Skykeep. Outro app só abre quando você pede: ligar para um contato, entrar numa
+reunião por vídeo ou clicar num link.
+</details>
 
-```
-macos/
-  Sources/Skykeep/   app SwiftUI: EventKit, Contacts, PhotoKit, iCloud Drive (arquivos),
-                     Chaveiro + LocalAuthentication, MapKit, QuickLook
-  bridge/            skykeep-cloud: o componente do iCloud dentro do app, em Rust,
-                     feito com os crates quince-auth, quince-core e quince-icloud deste repositório
-```
+<details>
+<summary><b>Dá para marcar checklists e editar as notas?</b></summary>
 
-- **Notas** vão pelo CloudKit com o mesmo código que o Skykeep usa no Windows e no Linux: o formato de documento da própria Apple, junção com edições de outros aparelhos, itens de checklist gravados na linha exata.
-- **E-mail** vai por IMAP (`imap.mail.me.com`) e SMTP (`smtp.mail.me.com`), com as enviadas guardadas em *Enviadas*.
-- O app e o componente conversam por JSON, uma linha por mensagem, por um pipe; nada fica escutando na rede, e não há servidores, contas ou análises do Skykeep.
-- **Navegadores e Senhas:** o macOS só instala o arquivo que liga a extensão da Apple ao app Senhas para o Chrome e o Firefox. Conectar grava esse mesmo arquivo na pasta `NativeMessagingHosts` do navegador, apontando para o ajudante que o macOS já traz.
+Sim, como no Notas: marque um item de checklist, digite no lugar (salva sozinho um instante
+depois), aplique título, lista ou checklist pelo menu de formato, crie, mova e apague notas. Notas
+trancadas com senha continuam criptografadas pela Apple e só abrem no Notas.
+</details>
 
-## Compilar
+<details>
+<summary><b>Ele mostra as senhas do Chaveiro do iCloud?</b></summary>
 
-Requer Xcode 26 ou mais novo e Rust (`rustup`). A metade Intel do componente do iCloud precisa de `rustup target add x86_64-apple-darwin`.
+A Apple lacra o Chaveiro do iCloud para os apps dela. O Skykeep mostra o Chaveiro do Mac, gera
+senhas fortes e conecta seus outros navegadores ao app Senhas da Apple, para todos usarem as mesmas
+senhas.
+</details>
+
+<details>
+<summary><b>Tem versão para Windows ou Linux?</b></summary>
+
+Sim: o próprio Skykeep, de Yashwanth Kamireddi, para Windows e Linux, no
+[README principal](../README.md#install). O Skykeep para Mac usa o mesmo código em Rust para o iCloud.
+</details>
+
+<details>
+<summary><b>Achei um bug ou tenho uma ideia.</b></summary>
+
+Abra uma [issue](https://github.com/matthfaria96/Skykeep/issues). Toda sugestão é bem-vinda.
+</details>
+
+## Compilando
+
+Requer Xcode 26 ou mais novo e Rust (`rustup`). A metade Intel do componente do iCloud precisa de
+`rustup target add x86_64-apple-darwin`.
 
 ```sh
 ./build.sh                   # build/Skykeep.app (universal, assinatura ad hoc)
@@ -74,14 +185,22 @@ Requer Xcode 26 ou mais novo e Rust (`rustup`). A metade Intel do componente do 
 ./build.sh --dmg             # e build/Skykeep-<versão>.dmg
 ```
 
-O ícone é desenhado por `Scripts/make-icon.swift` (variações `mac`, `flat`, `tray` e `notify`, as três últimas para Windows e Linux) e `Scripts/make-svg.py`. Cada envio compila o app no GitHub Actions (`.github/workflows/macos.yml`).
+```
+macos/
+  Sources/Skykeep/   app SwiftUI: EventKit, Contacts, PhotoKit, iCloud Drive, Chaveiro,
+                     LocalAuthentication, MapKit, Visualização Rápida
+  bridge/            skykeep-cloud, o componente do iCloud dentro do app, em Rust, feito com os
+                     crates quince-auth, quince-core e quince-icloud deste repositório:
+                     Notas pelo CloudKit, E-mail por IMAP e SMTP
+  Scripts/           o ícone (make-icon.swift, make-svg.py), para macOS, Windows e Linux
+```
 
-## Limites que vêm da Apple
+Cada envio compila o app e o `.dmg` no GitHub Actions ([macos.yml](../.github/workflows/macos.yml)).
 
-- As senhas do Chaveiro do iCloud são lacradas para os apps da Apple; o Skykeep mostra o Chaveiro do Mac e conecta os navegadores ao app Senhas.
-- Notas trancadas com senha continuam criptografadas pela Apple e só abrem no Notas.
-- Lembretes sinalizados não ficam disponíveis para apps, então há a lista *Importantes* (prioridade alta) no lugar.
+## Créditos e licença
 
-## Licença
-
-O Skykeep para Mac é software livre, sob a [GNU General Public License v3.0](../LICENSE). Copyright (C) 2026 Matheus Faria; Skykeep copyright (C) 2026 Yashwanth Kamireddi.
+O Skykeep para Mac é feito por [Matheus Faria](https://github.com/matthfaria96), num fork do
+[Skykeep](https://github.com/YashwanthKamireddi/Skykeep) de Yashwanth Kamireddi, cujo código do
+iCloud ele usa. Software livre sob a [GNU General Public License v3.0](../LICENSE).
+Copyright (C) 2026 Matheus Faria; Skykeep copyright (C) 2026 Yashwanth Kamireddi. Sem vínculo com
+a Apple Inc.

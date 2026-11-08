@@ -1,72 +1,183 @@
-# Skykeep for Mac
+<p align="center">
+  <a href="https://github.com/matthfaria96/Skykeep/releases/latest">
+    <img alt="Skykeep" src="Resources/AppIcon-1024.png" width="180">
+  </a>
+</p>
 
-**English** · [Português](README.pt-BR.md)
+<h1 align="center">Skykeep for Mac</h1>
 
-Your whole iCloud in one native macOS app: **Mail, Contacts, Reminders, Calendar, Notes, Photos, iCloud Drive and Passwords** in a single window, with a home screen (*Início*) that previews all of them. Built in Swift and SwiftUI with Liquid Glass. Notes and Mail are read and written online in iCloud, so a checklist ticked here is ticked on your iPhone, and no other app is ever opened.
+<p align="center"><b>English</b> · <a href="README.pt-BR.md">Português</a></p>
 
-A fork of [Skykeep](https://github.com/YashwanthKamireddi/Skykeep) by Yashwanth Kamireddi (Windows and Linux), made for the Mac by [Matheus Faria](https://github.com/matthfaria96). The interface is in Brazilian Portuguese. Free software (GPL-3.0).
+<p align="center">
+  <b>Your whole iCloud, in one window.</b><br>
+  Mail, Contacts, Reminders, Calendar, Notes, Photos, iCloud Drive and Passwords<br>
+  in a single native app, with a home screen that shows your day at a glance.
+</p>
 
-![Skykeep for Mac: the Calendar in month view](docs/calendar.jpg)
+<p align="center">
+  <img alt="Native Swift" src="https://img.shields.io/badge/Swift-native-F05138?style=flat-square&logo=swift&logoColor=white">
+  <img alt="macOS 26+" src="https://img.shields.io/badge/macOS%2026%2B-Apple%20Silicon%20%C2%B7%20Intel-26282e?style=flat-square&logo=apple">
+  <img alt="Free" src="https://img.shields.io/badge/price-free-2ea44f?style=flat-square">
+  <img alt="No ads, no tracking" src="https://img.shields.io/badge/no-ads%20%C2%B7%20tracking-3a3a3a?style=flat-square">
+</p>
 
-## Features
+<p align="center">
+  <a href="https://github.com/matthfaria96/Skykeep/releases/latest"><b>Download</b></a> ·
+  <a href="#what-it-does">What it does</a> ·
+  <a href="#installing-on-macos">How to install</a> ·
+  <a href="#first-steps">First steps</a> ·
+  <a href="#faq">FAQ</a> ·
+  <a href="#building">Building</a>
+</p>
 
-| Area | What it does |
+> [!NOTE]
+> **No Skykeep account, no servers, no ads, no tracking.** Your data goes between your Mac and
+> Apple only. Free and open source (GPL-3.0), part of [witchmymac](https://witchmymac.com/).
+
+<p align="center">
+  <img src="docs/calendar.jpg" alt="Skykeep for Mac: the Calendar in month view" width="860">
+</p>
+
+## What it does
+
+**Your iCloud, without the tabs.** Nine apps' worth of iCloud in one place, opening instantly. Notes
+and Mail are read and written online in iCloud, so a checklist ticked here is ticked on your iPhone,
+and no other app is ever opened.
+
+🏠 Home · ✉️ Mail · 👤 Contacts · ✅ Reminders · 📅 Calendar · 📝 Notes · 🖼️ Photos ·
+☁️ iCloud Drive · 🔑 Passwords · 🔎 Search everything · 📍 Menu bar
+
+- **Your day at a glance.** The home screen shows what's next on the calendar (with a Join button for video calls), today's reminders, unread mail, your latest notes, birthdays, photos from this day in other years and recent files.
+- **Notes as they were born.** Titles, lists, colours, links, pictures and checklists you can tick, edited in place and saved to iCloud on their own, on every device.
+- **Real mail.** Read, write, reply, forward, flag, archive and delete, on the iCloud server, with remote images and trackers blocked.
+- **The Mac's own data.** Reminders, Calendar, Contacts, Photos and iCloud Drive straight from macOS, already in sync, with Quick Look and in-app maps.
+- **Passwords everywhere.** Touch ID, a strong-password generator, and Vivaldi, Chrome, Brave, Edge, Arc and Opera connected to Apple's Passwords app, both ways.
+
+<p align="center"><a href="https://github.com/matthfaria96/Skykeep/releases/latest"><b>Download Skykeep</b></a> · <a href="https://github.com/matthfaria96/Skykeep/tree/main/macos">Source code</a> · macOS 26 Tahoe or later</p>
+
+## Installing on macOS
+
+**The quickest way: one line in Terminal.**
+
+```sh
+curl -fsSL https://witchmymac.com/install.sh | bash -s skykeep
+```
+
+It downloads the latest release from GitHub, checks its SHA-256, installs Skykeep in Applications
+and opens it, with no macOS warning (files downloaded by `curl` don't get the quarantine mark). Run
+it again to update. The script is open: [install.sh](https://witchmymac.com/install.sh).
+
+**Or by hand: three steps, thirty seconds.**
+
+1. **Download the `.dmg`** from the [latest release](https://github.com/matthfaria96/Skykeep/releases/latest).
+2. **Drag it to Applications.** Open the `.dmg` and drag Skykeep into the **Applications** folder.
+3. **Open it.** The first time, macOS asks you to confirm. See below how to allow it.
+
+### First launch: macOS will block the app. That's normal.
+
+Skykeep is free and doesn't go through the App Store, so macOS asks you to confirm where it came
+from once. After that it opens normally, for good.
+
+| Step | What to do |
+|:---:|---|
+| **1** | Open Skykeep. The **"“Skykeep” Not Opened"** alert appears. Click **Done** (or **OK**). Never *Move to Trash*. |
+| **2** | From the Apple menu (top-left corner), open **System Settings…** |
+| **3** | Go to **Privacy & Security** and scroll down to **Security**. It will say *"“Skykeep” was blocked to protect your Mac"*. Click **Open Anyway**. |
+| **4** | Confirm by clicking **Open Anyway** again and enter your password or use Touch ID. |
+| **5** | Done! From now on, just open it from Applications or Spotlight. |
+
+> [!TIP]
+> The witchmymac website has an [animated visual guide](https://witchmymac.com/#liberar) showing each of these screens.
+
+<details>
+<summary><b>Prefer the Terminal?</b></summary>
+
+After dragging Skykeep into Applications, remove the quarantine flag:
+
+```sh
+xattr -dr com.apple.quarantine /Applications/Skykeep.app
+```
+
+</details>
+
+> [!NOTE]
+> **Why does this happen?** Apple charges US$ 99 per year to "notarize" apps. Since Skykeep is
+> free, macOS asks you to confirm its origin once.
+
+### Requirements
+
+| App | Minimum macOS | Processor |
+|---|---|---|
+| Skykeep for Mac | 26 Tahoe | Apple Silicon and Intel |
+
+## First steps
+
+| App | The first time |
 |---|---|
-| **Início** | One tile per app: what's next on the calendar (with *Now* and a Join button for video calls) and the next seven days, today's reminders, unread mail, the latest notes, birthdays, photos from this day in other years, recent files, and a quick reminder field |
-| **Mail** | iCloud Mail online: read (remote images and trackers blocked), write, reply, reply all, forward, mark read/unread, flag, archive and delete, on the server like on the iPhone |
-| **Notes** | iCloud Notes online: Notes' own formatting (titles, lists, checklists, colours, links, pictures), checklists you can tick, text edited in place and saved by itself, paragraph styles, new notes, move and delete |
-| **Reminders** | Smart lists, your lists, tick, edit, move, priorities; dates typed in Portuguese ("amanhã 9h") |
-| **Calendar** | Day, week, month and agenda, a mini month, calendars on and off, new and edited events, locations on an in-app map |
-| **Contacts** | Search, cards, edit and create; call, message, FaceTime and e-mail in one click |
-| **Photos** | Library, favourites, videos, albums, the Hidden album behind Touch ID, the original saved to Downloads |
-| **iCloud Drive** | Your folders and the apps' (Pages, Numbers…), download state, Quick Look inside the app, drag files in to upload |
-| **Passwords** | Touch ID, the Mac's keychain, a strong-password generator, and **browsers connected to Apple's Passwords app** (Vivaldi, Chrome, Brave, Edge, Arc, Opera) |
-| **Everywhere** | Search everything (⌘K), ⌘1–⌘9 to switch apps, ⌘N to create, a menu bar item with the day and a quick reminder, open at login |
+| **Calendar, Reminders, Contacts, Photos** | Click **Allow access**. macOS asks once. |
+| **Notes** | Sign in to iCloud with your Apple Account and the six-digit code your devices show. Asked once; the session stays in your Mac's keychain. |
+| **Mail** | At [account.apple.com](https://account.apple.com) › Sign-In and Security › **App-Specific Passwords**, create one called "Skykeep" and paste it with your iCloud address. |
+| **Passwords in other browsers** | Passwords › **Navegadores** › **Conectar ao App Senhas**, then restart the browser. Install Apple's "iCloud Passwords" extension if it isn't there. |
+| **Pictures inside notes** | Optional: turn on **Full Disk Access** for Skykeep in System Settings › Privacy & Security. |
 
-## Install
+## FAQ
 
-Requires macOS 26 or later (Apple silicon or Intel).
+<details>
+<summary><b>Is my Apple Account password safe?</b></summary>
 
-Pick one:
+It never leaves for anywhere but Apple. Sign-in uses Apple's own SRP protocol with two-factor, the
+same way icloud.com signs in, so the password itself is never sent. The session is kept in your
+Mac's keychain. There are no Skykeep servers or accounts.
+</details>
 
-1. **Terminal, one line (recommended).** Paste this into Terminal:
-   ```sh
-   curl -fsSL https://witchmymac.com/install.sh | bash -s skykeep
-   ```
-   It downloads the latest release from GitHub, checks its SHA-256, installs Skykeep in Applications and opens it. There's no macOS warning, because files downloaded by `curl` don't get the "downloaded from the internet" mark. Run the same line again to update. The script is open: [install.sh](https://witchmymac.com/install.sh).
-2. **Download the DMG** from [Releases](https://github.com/matthfaria96/Skykeep/releases/latest), drag Skykeep to Applications, then allow it once with:
-   ```sh
-   xattr -dr com.apple.quarantine "/Applications/Skykeep.app"
-   ```
-   It only removes the "downloaded from the internet" mark from that app.
-3. **Download the DMG** and allow it in System Settings: open the app, click OK on the warning, then go to System Settings › Privacy & Security and click Open Anyway.
+<details>
+<summary><b>Why does Mail ask for an app-specific password?</b></summary>
 
-## Use
+It's how Apple lets mail apps other than Mail reach iCloud Mail (IMAP and SMTP). It only works for
+mail, and you can revoke it any time at account.apple.com.
+</details>
 
-- **Calendar, Reminders, Contacts, Photos:** click *Allow access* the first time; macOS asks once.
-- **Notes:** sign in to iCloud once with your Apple Account and the six-digit code your devices show. The password is checked with Apple's SRP, as icloud.com does, and never sent; the session stays in the Mac's keychain.
-- **Mail:** at [account.apple.com](https://account.apple.com) › Sign-In and Security › App-Specific Passwords, create one called "Skykeep" and paste it with your iCloud address. It stays in the keychain and can be revoked any time.
-- **Passwords in other browsers:** Passwords › *Navegadores* › *Conectar ao App Senhas*, restart the browser, and install Apple's "iCloud Passwords" extension if it isn't there. Passwords already saved in the browser can be imported into the Passwords app from the same screen.
-- **Pictures inside notes:** turn on *Full Disk Access* for Skykeep (System Settings › Privacy & Security) to show them from the copy Notes keeps on this Mac; without it they show as a labelled placeholder.
+<details>
+<summary><b>Will it open Notes, Mail or other apps on its own?</b></summary>
 
-## How it works
+No. Notes and Mail are read and written online in iCloud, maps and file previews open inside
+Skykeep. Another app only opens when you ask for it: calling a contact, joining a video call or
+clicking a link.
+</details>
 
-```
-macos/
-  Sources/Skykeep/   SwiftUI app: EventKit, Contacts, PhotoKit, iCloud Drive (files),
-                     Keychain + LocalAuthentication, MapKit, QuickLook
-  bridge/            skykeep-cloud: the iCloud helper inside the app bundle, in Rust,
-                     built from this repository's quince-auth, quince-core and quince-icloud
-```
+<details>
+<summary><b>Can I tick checklists and edit my notes?</b></summary>
 
-- **Notes** go over CloudKit through the same code Skykeep uses on Windows and Linux: Apple's own document format, merges with edits from other devices, checklist ticks written to the exact line.
-- **Mail** goes over IMAP (`imap.mail.me.com`) and SMTP (`smtp.mail.me.com`), with sent mail filed in *Sent Messages*.
-- The app and the helper speak JSON lines over a pipe; nothing listens on the network, and there are no Skykeep servers, accounts or analytics.
-- **Browsers and Passwords:** macOS only installs the file that links Apple's extension to the Passwords app for Chrome and Firefox. Connecting writes that same file into the browser's `NativeMessagingHosts` folder, pointing at the helper macOS ships.
+Yes, as in Notes: tick a checklist item, type in place (it saves by itself a moment later), set
+titles, lists or checklists from the format menu, create, move and delete notes. Notes locked
+with a password stay encrypted by Apple and open only in Notes.
+</details>
 
-## Build
+<details>
+<summary><b>Can it show my iCloud Keychain passwords?</b></summary>
 
-Requires Xcode 26 or later and Rust (`rustup`). The Intel half of the iCloud helper needs `rustup target add x86_64-apple-darwin`.
+Apple seals iCloud Keychain to its own apps. Skykeep shows the Mac's keychain, generates strong
+passwords, and connects your other browsers to Apple's Passwords app so they all share the same
+passwords.
+</details>
+
+<details>
+<summary><b>Is there a Windows or Linux version?</b></summary>
+
+Yes: Skykeep itself, by Yashwanth Kamireddi, for Windows and Linux, in the
+[main README](../README.md#install). Skykeep for Mac uses the same Rust code for iCloud.
+</details>
+
+<details>
+<summary><b>I found a bug or have an idea.</b></summary>
+
+Open an [issue](https://github.com/matthfaria96/Skykeep/issues). Every suggestion is welcome.
+</details>
+
+## Building
+
+Requires Xcode 26 or later and Rust (`rustup`). The Intel half of the iCloud helper needs
+`rustup target add x86_64-apple-darwin`.
 
 ```sh
 ./build.sh                   # build/Skykeep.app (universal, ad hoc signature)
@@ -74,14 +185,22 @@ Requires Xcode 26 or later and Rust (`rustup`). The Intel half of the iCloud hel
 ./build.sh --dmg             # and build/Skykeep-<version>.dmg
 ```
 
-The icon is drawn by `Scripts/make-icon.swift` (`mac`, `flat`, `tray` and `notify` variants, the last three for Windows and Linux) and `Scripts/make-svg.py`. Every push builds the app on GitHub Actions (`.github/workflows/macos.yml`).
+```
+macos/
+  Sources/Skykeep/   SwiftUI app: EventKit, Contacts, PhotoKit, iCloud Drive, Keychain,
+                     LocalAuthentication, MapKit, Quick Look
+  bridge/            skykeep-cloud, the iCloud helper inside the app, in Rust, built from this
+                     repository's quince-auth, quince-core and quince-icloud crates:
+                     Notes over CloudKit, Mail over IMAP and SMTP
+  Scripts/           the icon (make-icon.swift, make-svg.py), for macOS, Windows and Linux
+```
 
-## Limits that come from Apple
+Every push builds the app and its `.dmg` on GitHub Actions ([macos.yml](../.github/workflows/macos.yml)).
 
-- iCloud Keychain passwords are sealed to Apple's apps; Skykeep shows the Mac's keychain and connects browsers to the Passwords app.
-- Notes locked with a password stay encrypted by Apple and open only in Notes.
-- Flagged reminders aren't exposed to apps, so there's an *Importantes* (high priority) list instead.
+## Credits and license
 
-## License
-
-Skykeep for Mac is free software, released under the [GNU General Public License v3.0](../LICENSE). Copyright (C) 2026 Matheus Faria; Skykeep copyright (C) 2026 Yashwanth Kamireddi.
+Skykeep for Mac is made by [Matheus Faria](https://github.com/matthfaria96), in a fork of
+[Skykeep](https://github.com/YashwanthKamireddi/Skykeep) by Yashwanth Kamireddi, whose iCloud code
+it builds on. Free software under the [GNU General Public License v3.0](../LICENSE).
+Copyright (C) 2026 Matheus Faria; Skykeep copyright (C) 2026 Yashwanth Kamireddi. Not affiliated
+with or endorsed by Apple Inc.
