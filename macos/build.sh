@@ -1,5 +1,5 @@
 #!/bin/zsh
-# Builds Skykeep.app for macOS 26+ from this folder. Usage: ./build.sh [--install] [--run]
+# Builds Skykeep.app for macOS 26+ from this folder. Usage: ./build.sh [--dmg] [--install] [--run]
 set -euo pipefail
 cd "${0:A:h}"
 
@@ -22,8 +22,17 @@ cp "$BIN" "$APP/Contents/MacOS/Skykeep"
 
 # The iCloud helper (Rust, the same code as Skykeep for Windows and Linux): signs in to iCloud
 # and reads and writes Notes over CloudKit. Built from the repository's workspace.
-( cd .. && cargo build --release -p skykeep-cloud )
-cp ../target/release/skykeep-cloud "$APP/Contents/MacOS/skykeep-cloud"
+# Universal (Apple silicon + Intel) when the Intel target is installed
+# (`rustup target add x86_64-apple-darwin`); this Mac's architecture otherwise.
+if rustup target list --installed 2>/dev/null | grep -q x86_64-apple-darwin; then
+  ( cd .. && cargo build --release -p skykeep-cloud --target aarch64-apple-darwin \
+          && cargo build --release -p skykeep-cloud --target x86_64-apple-darwin )
+  lipo -create -output "$APP/Contents/MacOS/skykeep-cloud" \
+    ../target/aarch64-apple-darwin/release/skykeep-cloud ../target/x86_64-apple-darwin/release/skykeep-cloud
+else
+  ( cd .. && cargo build --release -p skykeep-cloud )
+  cp ../target/release/skykeep-cloud "$APP/Contents/MacOS/skykeep-cloud"
+fi
 # Its own stable signature, so the keychain keeps trusting it across builds.
 codesign --force --sign - --timestamp=none \
   -r='designated => identifier "io.github.matthfaria96.Skykeep.cloud"' \
@@ -50,10 +59,24 @@ codesign --force --sign - --timestamp=none \
   -r='designated => identifier "io.github.matthfaria96.Skykeep"' "$APP"
 echo "✓ $APP"
 
-if [[ "${1:-}" == "--install" || "${2:-}" == "--install" ]]; then
+# --dmg: the download, as the other witchmymac apps ship it — the app beside a link to
+# Applications, in build/Skykeep-<version>.dmg.
+if [[ " $* " == *" --dmg "* ]]; then
+  VERSION=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Contents/Info.plist")
+  STAGE="build/dmg"
+  rm -rf "$STAGE" "build/Skykeep-$VERSION.dmg"
+  mkdir -p "$STAGE"
+  ditto "$APP" "$STAGE/Skykeep.app"
+  ln -s /Applications "$STAGE/Applications"
+  hdiutil create -volname "Skykeep" -srcfolder "$STAGE" -ov -format UDZO "build/Skykeep-$VERSION.dmg" >/dev/null
+  rm -rf "$STAGE"
+  echo "✓ build/Skykeep-$VERSION.dmg"
+fi
+
+if [[ " $* " == *" --install "* ]]; then
   rm -rf /Applications/Skykeep.app
   cp -R "$APP" /Applications/
   echo "✓ instalado em /Applications/Skykeep.app"
   APP="/Applications/Skykeep.app"
 fi
-if [[ "${1:-}" == "--run" || "${2:-}" == "--run" ]]; then open "$APP"; fi
+if [[ " $* " == *" --run "* ]]; then open "$APP"; fi

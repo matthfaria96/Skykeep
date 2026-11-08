@@ -43,7 +43,8 @@ jobs:
         working-directory: macos
         run: |
           export DEVELOPER_DIR="$(xcode-select -p)"
-          ./build.sh
+          rustup target add aarch64-apple-darwin x86_64-apple-darwin
+          ./build.sh --dmg
       - name: Check the bundle
         run: |
           app=macos/build/Skykeep.app
@@ -51,10 +52,8 @@ jobs:
           test -x "$app/Contents/MacOS/skykeep-cloud"
           codesign --verify --deep "$app"
           printf '{"id":1,"cmd":"status"}\n{"id":2,"cmd":"mail.status"}\n' | "$app/Contents/MacOS/skykeep-cloud"
-      - name: Zip
-        run: cd macos/build && ditto -c -k --keepParent Skykeep.app Skykeep-macOS.zip
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: Skykeep-macOS
-          path: macos/build/Skykeep-macOS.zip
+          path: macos/build/Skykeep-*.dmg
           if-no-files-found: error

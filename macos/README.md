@@ -1,86 +1,87 @@
-# Skykeep para Mac
+# Skykeep for Mac
 
-Feito por **Matheus Faria** ([@matthfaria96](https://github.com/matthfaria96)), num fork do
-[Skykeep](https://github.com/YashwanthKamireddi/Skykeep) de Yashwanth Kamireddi. GPL-3.0.
+**English** · [Português](README.pt-BR.md)
 
-O Skykeep de Windows e Linux reimplementa o iCloud para quem não tem Mac. No Mac o iCloud já
-está no sistema, então esta versão é **nativa em SwiftUI** e lê direto o que o macOS já mantém
-sincronizado. Sem login, sem servidor, sem cópia dos seus dados — e **sem abrir nenhum outro
-app**: nada de Notas, Mail, Mapas ou Finder abrindo por conta própria.
+Your whole iCloud in one native macOS app: **Mail, Contacts, Reminders, Calendar, Notes, Photos, iCloud Drive and Passwords** in a single window, with a home screen (*Início*) that previews all of them. Built in Swift and SwiftUI with Liquid Glass. Notes and Mail are read and written online in iCloud, so a checklist ticked here is ticked on your iPhone, and no other app is ever opened.
 
-| Seção | Como funciona no Mac |
+A fork of [Skykeep](https://github.com/YashwanthKamireddi/Skykeep) by Yashwanth Kamireddi (Windows and Linux), made for the Mac by [Matheus Faria](https://github.com/matthfaria96). The interface is in Brazilian Portuguese. Free software (GPL-3.0).
+
+![Skykeep for Mac: the Calendar in month view](docs/calendar.jpg)
+
+## Features
+
+| Area | What it does |
 |---|---|
-| **Hoje** | Widgets: agenda em linha do tempo (com “Agora” e “Entrar” em reuniões), lembretes do dia, e-mails não lidos, aniversários, notas, “Neste dia” (Fotos), arquivos recentes e captura rápida |
-| **E-mail** | iCloud Mail online (IMAP/SMTP, com senha de app): ler, responder, encaminhar, enviar, marcar como lida, sinalizar, arquivar e apagar — no servidor, igual no iPhone; conteúdo remoto e rastreadores bloqueados |
-| **Lembretes** | EventKit: listas inteligentes, marcar, editar, mover, datas em português (“amanhã 9h”) |
-| **Calendário** | EventKit: dia, semana, mês e agenda, criar/editar eventos, local num mapa dentro do app |
-| **Notas** | Direto no iCloud (CloudKit), como no Skykeep para Windows/Linux: editar no lugar, marcar checklists, títulos e listas, criar, mover e apagar — em todos os dispositivos |
-| **Contatos** | Contacts: buscar, editar, criar, ligar, mensagem, FaceTime, e-mail |
-| **Fotos** | PhotoKit: biblioteca, álbuns, favoritos, vídeos, Ocultos com Touch ID, exportar original |
-| **iCloud Drive** | Pastas do Drive e dos apps (Pages, Numbers…), status de download, pré-visualização dentro do app, arrastar para enviar |
-| **Senhas** | Touch ID, Chaveiro do Mac, gerador de senhas e **conexão dos navegadores ao app Senhas** (veja abaixo) |
+| **Início** | One tile per app: what's next on the calendar (with *Now* and a Join button for video calls) and the next seven days, today's reminders, unread mail, the latest notes, birthdays, photos from this day in other years, recent files, and a quick reminder field |
+| **Mail** | iCloud Mail online: read (remote images and trackers blocked), write, reply, reply all, forward, mark read/unread, flag, archive and delete, on the server like on the iPhone |
+| **Notes** | iCloud Notes online: Notes' own formatting (titles, lists, checklists, colours, links, pictures), checklists you can tick, text edited in place and saved by itself, paragraph styles, new notes, move and delete |
+| **Reminders** | Smart lists, your lists, tick, edit, move, priorities; dates typed in Portuguese ("amanhã 9h") |
+| **Calendar** | Day, week, month and agenda, a mini month, calendars on and off, new and edited events, locations on an in-app map |
+| **Contacts** | Search, cards, edit and create; call, message, FaceTime and e-mail in one click |
+| **Photos** | Library, favourites, videos, albums, the Hidden album behind Touch ID, the original saved to Downloads |
+| **iCloud Drive** | Your folders and the apps' (Pages, Numbers…), download state, Quick Look inside the app, drag files in to upload |
+| **Passwords** | Touch ID, the Mac's keychain, a strong-password generator, and **browsers connected to Apple's Passwords app** (Vivaldi, Chrome, Brave, Edge, Arc, Opera) |
+| **Everywhere** | Search everything (⌘K), ⌘1–⌘9 to switch apps, ⌘N to create, a menu bar item with the day and a quick reminder, open at login |
 
-E ainda: busca em tudo (⌘K), ⌘1–⌘8 para trocar de seção, ⌘N para criar, um item na barra de
-menus com o dia e um lembrete rápido, e a opção de abrir ao iniciar a sessão.
+## Install
 
-## Senhas iguais no Safari, Vivaldi, Chrome, Brave, Edge, Arc e Opera
+Requires macOS 26 or later (Apple silicon or Intel).
 
-A Apple tem a extensão “Senhas do iCloud” para navegadores baseados no Chrome, mas o macOS só
-instala o arquivo que liga a extensão ao app Senhas (`com.apple.passwordmanager.json`) para o
-Chrome e o Firefox. Nos outros a extensão instala e nunca conecta. Em **Senhas › Navegadores**
-o Skykeep:
+Pick one:
 
-1. **Conecta** o navegador: grava esse mesmo arquivo na pasta `NativeMessagingHosts` dele,
-   apontando para o ajudante que o próprio macOS traz. Depois de reiniciar o navegador, a
-   extensão preenche e salva direto no app Senhas — nos dois sentidos, sempre, sem cópias.
-2. Abre a página da **extensão** na Chrome Web Store, se ainda não estiver instalada.
-3. **Importa** as senhas que já estão salvas no navegador: lê o banco do navegador em modo
-   somente leitura (a chave vem do Chaveiro, com o “Permitir” do Mac), grava um CSV no formato
-   do app Senhas em Downloads (só você lê), abre o app Senhas para *Arquivo › Importar Senhas…*
-   e apaga o arquivo (sobrescrevendo antes) quando você confirma, ou em 15 minutos.
+1. **Terminal, one line (recommended).** Paste this into Terminal:
+   ```sh
+   curl -fsSL https://witchmymac.com/install.sh | bash -s skykeep
+   ```
+   It downloads the latest release from GitHub, checks its SHA-256, installs Skykeep in Applications and opens it. There's no macOS warning, because files downloaded by `curl` don't get the "downloaded from the internet" mark. Run the same line again to update. The script is open: [install.sh](https://witchmymac.com/install.sh).
+2. **Download the DMG** from [Releases](https://github.com/matthfaria96/Skykeep/releases/latest), drag Skykeep to Applications, then allow it once with:
+   ```sh
+   xattr -dr com.apple.quarantine "/Applications/Skykeep.app"
+   ```
+   It only removes the "downloaded from the internet" mark from that app.
+3. **Download the DMG** and allow it in System Settings: open the app, click OK on the warning, then go to System Settings › Privacy & Security and click Open Anyway.
 
-## Compilar
+## Use
 
-Requer macOS 26 ou superior e o Xcode instalado.
+- **Calendar, Reminders, Contacts, Photos:** click *Allow access* the first time; macOS asks once.
+- **Notes:** sign in to iCloud once with your Apple Account and the six-digit code your devices show. The password is checked with Apple's SRP, as icloud.com does, and never sent; the session stays in the Mac's keychain.
+- **Mail:** at [account.apple.com](https://account.apple.com) › Sign-In and Security › App-Specific Passwords, create one called "Skykeep" and paste it with your iCloud address. It stays in the keychain and can be revoked any time.
+- **Passwords in other browsers:** Passwords › *Navegadores* › *Conectar ao App Senhas*, restart the browser, and install Apple's "iCloud Passwords" extension if it isn't there. Passwords already saved in the browser can be imported into the Passwords app from the same screen.
+- **Pictures inside notes:** turn on *Full Disk Access* for Skykeep (System Settings › Privacy & Security) to show them from the copy Notes keeps on this Mac; without it they show as a labelled placeholder.
 
-```sh
-./build.sh            # gera build/Skykeep.app (precisa do Xcode e do Rust)
-./build.sh --install  # copia para /Applications
-./build.sh --run      # compila e abre
+## How it works
+
+```
+macos/
+  Sources/Skykeep/   SwiftUI app: EventKit, Contacts, PhotoKit, iCloud Drive (files),
+                     Keychain + LocalAuthentication, MapKit, QuickLook
+  bridge/            skykeep-cloud: the iCloud helper inside the app bundle, in Rust,
+                     built from this repository's quince-auth, quince-core and quince-icloud
 ```
 
-A assinatura é ad-hoc, o que basta para usar neste Mac. O requisito da assinatura fixa o
-identificador do app, então as permissões dadas uma vez continuam valendo depois de recompilar. Para distribuir, assine com um
-Developer ID (`codesign --options runtime --sign "Developer ID Application: …"`) e faça a
-notarização com `xcrun notarytool`.
+- **Notes** go over CloudKit through the same code Skykeep uses on Windows and Linux: Apple's own document format, merges with edits from other devices, checklist ticks written to the exact line.
+- **Mail** goes over IMAP (`imap.mail.me.com`) and SMTP (`smtp.mail.me.com`), with sent mail filed in *Sent Messages*.
+- The app and the helper speak JSON lines over a pipe; nothing listens on the network, and there are no Skykeep servers, accounts or analytics.
+- **Browsers and Passwords:** macOS only installs the file that links Apple's extension to the Passwords app for Chrome and Firefox. Connecting writes that same file into the browser's `NativeMessagingHosts` folder, pointing at the helper macOS ships.
 
-## Notas pelo iCloud
+## Build
 
-As Notas usam o mesmo código do Skykeep para Windows e Linux (`crates/quince-auth` e
-`crates/quince-icloud`), compilado como `skykeep-cloud` (em `macos/bridge`) e embutido no app.
-Você entra uma vez com a conta Apple e o código de dois fatores; a senha é verificada com o SRP da
-Apple (nunca é enviada) e a sessão fica no Chaveiro do Mac. O app Notas nunca é aberto.
+Requires Xcode 26 or later and Rust (`rustup`). The Intel half of the iCloud helper needs `rustup target add x86_64-apple-darwin`.
 
-## E-mail pelo iCloud
+```sh
+./build.sh                   # build/Skykeep.app (universal, ad hoc signature)
+./build.sh --install         # and copies it to /Applications
+./build.sh --dmg             # and build/Skykeep-<version>.dmg
+```
 
-O mesmo componente (`skykeep-cloud`) fala com o iCloud Mail como qualquer app de e-mail:
-IMAP em `imap.mail.me.com` e SMTP em `smtp.mail.me.com`. A Apple pede uma **senha de app**,
-criada uma vez em account.apple.com › Entrar e Segurança › Senhas de App; ela fica no Chaveiro.
+The icon is drawn by `Scripts/make-icon.swift` (`mac`, `flat`, `tray` and `notify` variants, the last three for Windows and Linux) and `Scripts/make-svg.py`. Every push builds the app on GitHub Actions (`.github/workflows/macos.yml`).
 
-## Acesso Total ao Disco (imagens das notas)
+## Limits that come from Apple
 
-O Notas e o Mail não têm API pública, e a única forma de lê-los sem abrir esses apps é ler os
-arquivos deles no disco, que o macOS protege. Em **Ajustes do Sistema › Privacidade e Segurança ›
-Acesso Total ao Disco**, ligue o Skykeep. O Skykeep só **lê** esses arquivos (abre o SQLite em
-modo somente leitura) e nunca escreve neles.
+- iCloud Keychain passwords are sealed to Apple's apps; Skykeep shows the Mac's keychain and connects browsers to the Passwords app.
+- Notes locked with a password stay encrypted by Apple and open only in Notes.
+- Flagged reminders aren't exposed to apps, so there's an *Importantes* (high priority) list instead.
 
-## Limites que vêm da Apple
+## License
 
-- **Senhas do iCloud (Chaveiro do iCloud)** ficam lacradas para os apps da Apple. O Skykeep mostra
-  as do Chaveiro do Mac e conecta os navegadores ao app Senhas (veja acima).
-- **Notas trancadas com senha** continuam criptografadas pela Apple e só abrem no app Notas.
-- **Lembretes sinalizados** não aparecem no EventKit, por isso o app tem a lista “Importantes”
-  (prioridade alta) no lugar.
-- **O que abre outro app, só quando você clica:** ligar ou mandar mensagem para um contato,
-  entrar numa reunião por vídeo, um link num e-mail, “Abrir com o App Padrão” no Drive e os
-  Ajustes do Sistema para dar permissões.
+Skykeep for Mac is free software, released under the [GNU General Public License v3.0](../LICENSE). Copyright (C) 2026 Matheus Faria; Skykeep copyright (C) 2026 Yashwanth Kamireddi.

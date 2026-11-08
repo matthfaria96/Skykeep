@@ -80,6 +80,28 @@ Skykeep is a native engine written in Rust with a light Tauri window on top: one
 
 ## Install
 
+### macOS — Skykeep for Mac
+
+Requires macOS 26 or later (Apple silicon or Intel).
+
+Pick one:
+
+1. **Terminal, one line (recommended).** Paste this into Terminal:
+   ```sh
+   curl -fsSL https://witchmymac.com/install.sh | bash -s skykeep
+   ```
+   It downloads the latest release from GitHub, checks its SHA-256, installs Skykeep in Applications and opens it. There's no macOS warning, because files downloaded by `curl` don't get the "downloaded from the internet" mark. Run the same line again to update. The script is open: [install.sh](https://witchmymac.com/install.sh).
+2. **Download the DMG** from [Releases](https://github.com/matthfaria96/Skykeep/releases/latest), drag Skykeep to Applications, then allow it once with:
+   ```sh
+   xattr -dr com.apple.quarantine "/Applications/Skykeep.app"
+   ```
+   It only removes the "downloaded from the internet" mark from that app.
+3. **Download the DMG** and allow it in System Settings: open the app, click OK on the warning, then go to System Settings › Privacy & Security and click Open Anyway.
+
+Then open Notes to sign in to iCloud once, and Mail to connect it with an app-specific password. Details in [macos/README.md](macos/README.md).
+
+### Windows and Linux
+
 | Platform | Installation |
 |---|---|
 | **Windows** | [Microsoft Store](https://apps.microsoft.com/detail/9P6B042JNK54), or the [installer](https://github.com/YashwanthKamireddi/Skykeep/releases/latest/download/Skykeep-windows-x64-setup.exe). Also `choco install skykeep` and [Scoop](https://github.com/YashwanthKamireddi/scoop-bucket) |

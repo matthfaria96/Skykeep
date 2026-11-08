@@ -11,8 +11,8 @@ src-tauri/.*
 crates/.*
 packaging/.*
 snap/.*
-macos/(Package\.swift|build\.sh|README\.md|\.gitignore)
-macos/(Sources|Resources|Scripts)/.*
+macos/(Package\.swift|build\.sh|README\.md|README\.pt-BR\.md|\.gitignore)
+macos/(Sources|Resources|Scripts|docs)/.*
 macos/bridge/(Cargo\.toml|src/.*)
 docs/media/.*
 (\.gitignore|\.gitleaks\.toml|\.gitleaksignore)
