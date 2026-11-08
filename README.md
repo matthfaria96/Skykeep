@@ -22,6 +22,15 @@ Notes, Reminders, Calendar, Contacts, iCloud Drive and Photos as real desktop ap
 
 </div>
 
+## This fork: Skykeep for Mac, and a new look
+
+This is a fork of [Skykeep](https://github.com/YashwanthKamireddi/Skykeep) by Yashwanth Kamireddi, maintained by **Matheus Faria** ([@matthfaria96](https://github.com/matthfaria96)), focused on usability. It adds:
+
+- **Skykeep for Mac** ([`macos/`](macos/README.md)) — a native SwiftUI app that puts Mail, Contacts, Reminders, Calendar, Notes, Photos, iCloud Drive and Passwords in one window, with a home screen that previews all of them. Notes and Mail are read and written online in iCloud through the same Rust code this repository uses on Windows and Linux (checklists tick, notes are edited in place, mail is sent and filed), so no other app is ever opened. It also connects Chromium browsers such as Vivaldi to Apple's Passwords app.
+- **A new icon** — a cloud kept by a keyhole, under a rising sun — for macOS, Windows and Linux alike.
+
+The Windows and Linux apps are otherwise unchanged.
+
 ## Built to be trusted
 
 Skykeep asks for your Apple Account, so it's built to deserve it.
@@ -266,7 +275,7 @@ Something you miss? [Open an issue](https://github.com/YashwanthKamireddi/Skykee
 
 ## Contributing
 
-Skykeep is made by [Yashwanth](https://github.com/YashwanthKamireddi), who uses an iPhone with a Linux desktop every day. Bug reports, packaging for your distro, design ideas and code are all welcome. [CONTRIBUTING.md](.github/CONTRIBUTING.md) has the setup and a map of the code; run `./check.sh` before a pull request.
+Skykeep is made by [Yashwanth](https://github.com/YashwanthKamireddi), who uses an iPhone with a Linux desktop every day. Skykeep for Mac and the new icon are by [Matheus Faria](https://github.com/matthfaria96), in this fork. Bug reports, packaging for your distro, design ideas and code are all welcome. [CONTRIBUTING.md](.github/CONTRIBUTING.md) has the setup and a map of the code; run `./check.sh` before a pull request.
 
 ```sh
 git clone https://github.com/YashwanthKamireddi/Skykeep.git
@@ -279,4 +288,4 @@ If Skykeep saves you a trip to the browser, a ⭐ helps other iPhone, iPad and M
 
 ## License
 
-Copyright (C) 2026 Yashwanth Kamireddi. Released under [GPL-3.0](LICENSE): if you share a copy or a changed version, keep this notice and the same licence. Skykeep is an independent project, not affiliated with or endorsed by Apple Inc. iCloud is a trademark of Apple Inc.
+Copyright (C) 2026 Yashwanth Kamireddi; Skykeep for Mac, the new icon and other changes in this fork copyright (C) 2026 Matheus Faria. Released under [GPL-3.0](LICENSE): if you share a copy or a changed version, keep this notice and the same licence. Skykeep is an independent project, not affiliated with or endorsed by Apple Inc. iCloud is a trademark of Apple Inc.

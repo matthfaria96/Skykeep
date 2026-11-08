@@ -1,0 +1,60 @@
+# Skykeep for Mac (macos/): the SwiftUI app and its iCloud helper (macos/bridge, the same Rust
+# crates as the Windows and Linux app), built into Skykeep.app on every change to either, and
+# kept as a zipped artifact. Ad-hoc signed: it runs on the Mac it is opened on; distribution
+# needs a Developer ID and notarisation (macos/README.md).
+name: macOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["macos/**", "crates/**", "Cargo.toml", "Cargo.lock", ".github/workflows/macos.yml"]
+  pull_request:
+    branches: [main]
+    paths: ["macos/**", "crates/**", "Cargo.toml", "Cargo.lock", ".github/workflows/macos.yml"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: macos-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  app:
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Toolchains
+        run: |
+          # The newest Xcode on the image (the app needs the macOS 26 SDK and Swift 6.2).
+          xcode=$(ls -d /Applications/Xcode_*.app 2>/dev/null | sort -V | tail -1)
+          if [ -n "$xcode" ]; then sudo xcode-select -s "$xcode"; fi
+          xcodebuild -version
+          swift --version
+          # rust-toolchain.toml picks the repository's Rust.
+          rustup show active-toolchain || rustup toolchain install
+          cargo --version
+      - name: Build Skykeep.app
+        working-directory: macos
+        run: |
+          export DEVELOPER_DIR="$(xcode-select -p)"
+          ./build.sh
+      - name: Check the bundle
+        run: |
+          app=macos/build/Skykeep.app
+          test -x "$app/Contents/MacOS/Skykeep"
+          test -x "$app/Contents/MacOS/skykeep-cloud"
+          codesign --verify --deep "$app"
+          printf '{"id":1,"cmd":"status"}\n{"id":2,"cmd":"mail.status"}\n' | "$app/Contents/MacOS/skykeep-cloud"
+      - name: Zip
+        run: cd macos/build && ditto -c -k --keepParent Skykeep.app Skykeep-macOS.zip
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: Skykeep-macOS
+          path: macos/build/Skykeep-macOS.zip
+          if-no-files-found: error

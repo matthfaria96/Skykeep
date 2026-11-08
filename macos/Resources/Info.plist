@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key><string>Skykeep</string>
+    <key>CFBundleDisplayName</key><string>Skykeep</string>
+    <key>CFBundleIdentifier</key><string>io.github.matthfaria96.Skykeep</string>
+    <key>CFBundleExecutable</key><string>Skykeep</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleShortVersionString</key><string>1.1.0</string>
+    <key>CFBundleVersion</key><string>2</string>
+    <key>CFBundleIconFile</key><string>AppIcon</string>
+    <key>CFBundleDevelopmentRegion</key><string>pt-BR</string>
+    <key>CFBundleLocalizations</key><array><string>pt-BR</string></array>
+    <key>LSMinimumSystemVersion</key><string>26.0</string>
+    <key>LSApplicationCategoryType</key><string>public.app-category.productivity</string>
+    <key>NSHighResolutionCapable</key><true/>
+    <key>NSPrincipalClass</key><string>NSApplication</string>
+    <key>NSHumanReadableCopyright</key><string>GPL-3.0</string>
+
+    <key>NSCalendarsFullAccessUsageDescription</key>
+    <string>O Skykeep mostra e edita seus eventos do Calendário — os mesmos que já sincronizam com o iCloud.</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>O Skykeep mostra e edita seus eventos do Calendário.</string>
+    <key>NSRemindersFullAccessUsageDescription</key>
+    <string>O Skykeep mostra e marca seus Lembretes do iCloud.</string>
+    <key>NSRemindersUsageDescription</key>
+    <string>O Skykeep mostra e marca seus Lembretes do iCloud.</string>
+    <key>NSContactsUsageDescription</key>
+    <string>O Skykeep mostra seus contatos para você ligar, mandar mensagem ou e-mail com um clique.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>O Skykeep mostra sua biblioteca do Fotos do iCloud.</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>Para abrir suas senhas e o álbum Ocultos.</string>
+</dict>
+</plist>

@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["probe", "crates/quince-auth", "crates/quince-core", "crates/quince-icloud", "crates/quince-media", "crates/quince-vfs", "src-tauri"]
+members = ["probe", "macos/bridge", "crates/quince-auth", "crates/quince-core", "crates/quince-icloud", "crates/quince-media", "crates/quince-vfs", "src-tauri"]
 
 [workspace.package]
 edition = "2021"
