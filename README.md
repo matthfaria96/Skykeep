@@ -29,6 +29,29 @@ Skykeep keeps your iCloud on your own computer and syncs it quietly in the backg
 
 <p align="center"><img src="docs/media/hero.webp" alt="Skykeep ticking off a reminder, switching to the week in Calendar, opening a note, then a contact card, an iCloud Drive folder and the photo library" width="880"></p>
 
+## This fork: Skykeep for Mac
+
+### <img src="macos/Resources/AppIcon-1024.png" width="36" align="top" alt=""> Skykeep for Mac
+
+**Your whole iCloud, in one window.** This fork of Skykeep, maintained by [Matheus Faria](https://github.com/matthfaria96), brings it to the Mac as a native SwiftUI app: nine apps' worth of iCloud in one place, Notes and Mail read and written online, and no other app ever opened.
+
+🏠 Home · ✉️ Mail · 👤 Contacts · ✅ Reminders · 📅 Calendar · 📝 Notes · 🖼️ Photos ·
+☁️ iCloud Drive · 🔑 Passwords · 🔎 Search everything · 📍 Menu bar
+
+- **Your day at a glance.** A home screen with what's next, today's reminders, unread mail, the latest notes, birthdays and photos from this day.
+- **Notes as they were born.** Formatting and checklists you can tick, edited in place and saved to iCloud, through the same Rust code Skykeep uses on Windows and Linux.
+- **Real mail.** Read, write, reply, flag, archive and delete on the iCloud server.
+- **Passwords everywhere.** Vivaldi, Chrome, Brave, Edge, Arc and Opera connected to Apple's Passwords app.
+- **A new icon** for macOS, Windows and Linux alike.
+
+<p align="center">
+  <img src="macos/docs/calendar.jpg" alt="Skykeep for Mac: the Calendar in month view" width="860">
+</p>
+
+<p align="center"><a href="https://github.com/matthfaria96/Skykeep/releases/latest"><b>Download Skykeep for Mac</b></a> · <a href="macos/README.md">Read more</a> · macOS 26 Tahoe or later</p>
+
+The Windows and Linux apps are otherwise the same as upstream, kept up to date with it.
+
 ## Your iCloud, as apps
 
 <table>
@@ -70,6 +93,18 @@ Skykeep is a native engine written in Rust with a light Tauri window on top: one
 [SECURITY.md](SECURITY.md) shows the code behind each point.
 
 ## Install
+
+### macOS — Skykeep for Mac
+
+Requires macOS 26 Tahoe or later (Apple Silicon and Intel). The quickest way is one line in Terminal:
+
+```sh
+curl -fsSL https://witchmymac.com/install.sh | bash -s skykeep
+```
+
+Or download the `.dmg` from the [latest release](https://github.com/matthfaria96/Skykeep/releases/latest) and drag Skykeep to Applications. The first time, macOS asks you to confirm where it came from: [macos/README.md](macos/README.md#installing-on-macos) shows each step.
+
+### Windows and Linux
 
 | Platform | Installation |
 |---|---|
@@ -129,6 +164,6 @@ Quit Skykeep and start it with `SKYKEEP_LOG=1 skykeep` (Windows PowerShell: `$en
 
 ## Contributing
 
-Bug reports, packaging for your distro, design ideas and code are all welcome. [CONTRIBUTING.md](.github/CONTRIBUTING.md) has the setup and a map of the code, and [Discussions](https://github.com/YashwanthKamireddi/Skykeep/discussions) is the place for questions and ideas. Security problems go to a [private report](https://github.com/YashwanthKamireddi/Skykeep/security/advisories/new).
+Skykeep is made by [Yashwanth](https://github.com/YashwanthKamireddi). Skykeep for Mac and the new icon are by [Matheus Faria](https://github.com/matthfaria96), in this fork. Bug reports, packaging for your distro, design ideas and code are all welcome. [CONTRIBUTING.md](.github/CONTRIBUTING.md) has the setup and a map of the code, and [Discussions](https://github.com/YashwanthKamireddi/Skykeep/discussions) is the place for questions and ideas. Security problems go to a [private report](https://github.com/YashwanthKamireddi/Skykeep/security/advisories/new).
 
-Copyright (C) 2026 Yashwanth Kamireddi. [GPL-3.0](LICENSE): if you share a copy or a changed version, keep this notice and the same licence. Not affiliated with or endorsed by Apple Inc.
+Copyright (C) 2026 Yashwanth Kamireddi; Skykeep for Mac, the new icon and other changes in this fork copyright (C) 2026 Matheus Faria. [GPL-3.0](LICENSE): if you share a copy or a changed version, keep this notice and the same licence. Not affiliated with or endorsed by Apple Inc.
